@@ -1,12 +1,70 @@
 <?php
 session_start();
+$host = 'localhost'; // Adres serwera bazy danych (np. localhost)
+$user = 'root'; // Nazwa użytkownika bazy danych (np. root dla lokalnego serwera)
+$password = ''; // Hasło bazy danych (często puste dla lokalnego serwera XAMPP)
+$dbname = 'gameassistandb'; // Nazwa bazy danych, którą chcesz połączyć
 
-// Sprawdzamy, czy użytkownik jest zalogowany
+// Utworzenie połączenia
+$conn = new mysqli($host, $user, $password, $dbname);
+
+// Sprawdź, czy połączenie działa
+if ($conn->connect_error) {
+    die("Błąd połączenia z bazą danych: " . $conn->connect_error);
+}
+
+// Sprawdź, czy użytkownik jest zalogowany
 if (!isset($_SESSION['username'])) {
-    header("Location: index.php");
+    header("Location: index.php"); // Przekierowanie do logowania, jeśli użytkownik nie jest zalogowany
     exit();
 }
+
+// Obsługa usuwania konta
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_SESSION['username']; // Pobierz nazwę użytkownika z sesji
+
+    // Usuń użytkownika z bazy danych
+    if ($conn) { // Upewnij się, że połączenie jest aktywne
+        $stmt = $conn->prepare("DELETE FROM users WHERE USERNAME = ?");
+        $stmt->bind_param("s", $username);
+
+        if ($stmt->execute()) {
+            $stmt->close();
+            
+            // Zniszcz sesję użytkownika
+            session_unset();
+            session_destroy();
+
+            echo <<<HTML
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <link rel="stylesheet" type="text/css" href="gamelikecss.css">
+    <link rel="stylesheet" type="text/css" href="profilelist.css">
+    <link rel="shortcut icon" href="radiant-rank.png">
+    <meta charset="UTF-8">
+    <title>Do zobaczenia</title>
+</head>
+<body>
+<div class="floating-island">
+    <h1>Twoje konto zostało usunięte.</h1>
+    <p>Dziękujemy za skorzystanie z naszej platformy. Mamy nadzieję, że wrócisz w przyszłości!</p>
+    <a href="registerindex.php" class="linkglow">Zarejestruj się ponownie</a>
+</div>
+</body>
+</html>
+HTML;
+        exit();
+            exit();
+        } else {
+            echo "Wystąpił błąd podczas usuwania konta.";
+        }
+    } else {
+        echo "Błąd połączenia z bazą danych.";
+    }
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pl">
@@ -18,6 +76,15 @@ if (!isset($_SESSION['username'])) {
     <link rel="stylesheet" type="text/css" href="profilelist.css">
     <link rel="shortcut icon" href="radiant-rank.png">
     <script src="profilelist.js"></script>
+    <script>
+        function confirmDeletion() {
+            // Wyświetl okno potwierdzenia
+            const confirmation = confirm("Czy na pewno chcesz usunąć swoje konto? Tej operacji nie można cofnąć.");
+            if (confirmation) {
+                document.getElementById('deleteAccountForm').submit(); // Prześlij formularz
+            }
+        }
+    </script>
 </head>
 <body>
 
@@ -46,6 +113,13 @@ if (!isset($_SESSION['username'])) {
 
             <button type="submit" name="submit">Zaktualizuj E-mail</button>
         </form>
+        </div>
+    </div>
+    <div class="dashboardrightheaderdiv">
+        <div>
+            <form id="deleteAccountForm" method="POST">
+                <button type="button" onclick="confirmDeletion()">Usuń Konto</button>
+            </form>
         </div>
     </div>
 

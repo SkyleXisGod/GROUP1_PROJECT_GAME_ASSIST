@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+$lastVisit = "Brak danych";  // Domyślna wartość, jeśli użytkownik nie ma jeszcze rekordu w tabeli
+$lastVisit = "Brak danych";  // Domyślna wartość, jeśli użytkownik nie ma jeszcze rekordu w tabeli
+
 // Połączenie z bazą danych
 $host = 'localhost';
 $username = 'root';  // Zmień na swoją nazwę użytkownika MySQL
@@ -47,6 +50,9 @@ if ($emailResult->num_rows > 0) {
     $userEmail = "Brak e-maila"; // Jeśli e-mail nie istnieje
 }
 
+// Przed sprawdzeniem ostatniej wizyty użytkownika
+$currentDateTime = new DateTime(); // Tworzymy nowy obiekt DateTime
+
 // Sprawdzamy, kiedy użytkownik ostatni raz odwiedził stronę
 $sqlCheckVisit = "SELECT last_visit, visit_count FROM visit_counts WHERE USERID = ?";
 $stmtCheckVisit = $conn->prepare($sqlCheckVisit);
@@ -57,11 +63,12 @@ $visitResult = $stmtCheckVisit->get_result();
 // Jeśli użytkownik nie ma jeszcze rekordu w tabeli visit_counts, tworzymy nowy
 if ($visitResult->num_rows === 0) {
     // Ustawiamy pierwszy rekord z liczbą wizyt na 1
-    $sqlInsertVisit = "INSERT INTO visit_counts (USER_ID, last_visit, visit_count) VALUES (?, NOW(), 1)";
+    $sqlInsertVisit = "INSERT INTO visit_counts (USERID, last_visit, visit_count) VALUES (?, NOW(), 1)";
     $stmtInsertVisit = $conn->prepare($sqlInsertVisit);
     $stmtInsertVisit->bind_param('i', $userId);
     $stmtInsertVisit->execute();
     $visitCount = 1; // Liczba wizyt to 1
+    $lastVisit = "Pierwsza wizyta";  // Wartość domyślna dla nowych użytkowników
 } else {
     // Jeśli użytkownik ma rekord w tabeli, sprawdzamy, kiedy była ostatnia wizyta
     $visitData = $visitResult->fetch_assoc();
@@ -69,7 +76,6 @@ if ($visitResult->num_rows === 0) {
     $visitCount = $visitData['visit_count'];
 
     // Sprawdzamy, czy minęły 24 godziny od ostatniej wizyty
-    $currentDateTime = new DateTime();
     $lastVisitDateTime = new DateTime($lastVisit);
     $interval = $currentDateTime->diff($lastVisitDateTime);
 
@@ -78,7 +84,7 @@ if ($visitResult->num_rows === 0) {
         $visitCount++;
 
         // Aktualizujemy datę ostatniej wizyty i liczbę wizyt
-        $sqlUpdateVisit = "UPDATE visit_counts SET last_visit = NOW(), visit_count = ? WHERE USER_ID = ?";
+        $sqlUpdateVisit = "UPDATE visit_counts SET last_visit = NOW(), visit_count = ? WHERE USERID = ?";
         $stmtUpdateVisit = $conn->prepare($sqlUpdateVisit);
         $stmtUpdateVisit->bind_param('ii', $visitCount, $userId);
         $stmtUpdateVisit->execute();

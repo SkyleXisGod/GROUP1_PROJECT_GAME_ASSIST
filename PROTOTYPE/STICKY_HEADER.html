@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sticky Header Example</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .content {
+            margin-top: 80px; /* Adjust this margin to accommodate the header height */
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Sticky Header</h1>
+    </div>
+
+    <div class="content">
+        <h2>Scroll down to see the sticky header</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        <!-- Add more content here -->
+    </div>
+
+    <script>
+        window.addEventListener('scroll', function () {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 0) {
+                header.style.backgroundColor = '#555'; // Change background color on scroll
+            } else {
+                header.style.backgroundColor = '#333'; // Reset background color when at the top
+            }
+        });
+    </script>
+</body>
+</html>

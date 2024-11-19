@@ -38,7 +38,7 @@ if ($username) {
         $profilePic = $row['PROFILEPICFILE'] ? 'data:image/jpeg;base64,' . base64_encode($row['PROFILEPICFILE']) : 'https://via.placeholder.com/50';
         $role_id = $row['ROLEID'];
 
-        // Jeśli użytkownik nie ma roli user+/admin (role_id == 2), blokujemy dostęp do statystyk
+        // Jeśli użytkownik nie ma roli user+ (role_id == 2), blokujemy dostęp do statystyk
         if ($role_id == 2) {
             $lockedIcon = '<img src="lock-icon.png" alt="Locked" style="width: 16px; height: 16px; margin-left: 5px;">';
             $linkHref = '#';  // Ustawiamy href na #, aby link nie działał
@@ -101,20 +101,14 @@ $conn->close();
 <div class="dashboardmaindiv">
     <div class="floating-island">
         <div class="link-grid">
-            <a href="agentstip.php" class="link-box"><img src="ICONS/agents-icon.png" alt="agents-logo" width="230px" heigth="230px"></a><br><br><br><br>
-            <a href="techtip.php" class="link-box"><img src="ICONS/valorant-tech.png" alt="valorant-tech" width="200px" heigth="200px"></a><br><br><br><br>
-            <a href="guntip.php" class="link-box"><img src="ICONS/gun-icon.png" alt="gun-logo" width="350px" heigth="100px"></a><br><br><br><br>
+            <a href="agentstip.php" class="link-box"><img src="ICONS\agents-icon.png" alt="agents-logo" width="230px" heigth="230px"></a><br><br><br><br>
+            <a href="techtip.php" class="link-box"><img src="ICONS\valorant-tech.png" alt="valorant-tech" width="200px" heigth="200px"></a><br><br><br><br>
+            <a href="guntip.php" class="link-box"><img src="ICONS\gun-icon.png" alt="gun-logo" width="350px" heigth="100px"></a><br><br><br><br>
         </div>
         <div class="link-grid">
-            <a href="crosshairtip.php" class="link-box"><img src="ICONS/crosshair-icon.png" alt="crosshair-logo" width="250px" heigth="250px"></a><br><br><br><br>
-            <a href="phrasebooktip.php" class="link-box"><img src="ICONS/phrase-book-icon.png" alt="phrase-book-logo"></a><br><br><br><br>
-            <a href="questionmarktip.php" class="link-box"><img src="ICONS/question-mark-icon.png" width="230px" heigth="230px" alt="question-mark-logo"></a><br><br><br><br>
-        </div>
-    </div>
-
-    <!-- Druga floating-island -->
-    <div class="floating-island2">
-        <div class="link-grid">ez
+            <a href="crosshairtip.php" class="link-box"><img src="ICONS\crosshair-icon.png" alt="crosshair-logo" width="250px" heigth="250px"></a><br><br><br><br>
+            <a href="phrasebooktip.php" class="link-box"><img src="ICONS\phrase-book-icon.png" alt="phrase-book-logo"></a><br><br><br><br>
+            <a href="questionmarktip.php" class="link-box"><img src="ICONS\question-mark-icon.png" width="230px" heigth="230px" alt="agents-logo"></a><br><br><br><br>
         </div>
     </div>
 </div>

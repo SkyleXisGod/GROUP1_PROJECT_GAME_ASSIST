@@ -89,6 +89,9 @@ if (isset($_SESSION['username'])) {
             if ($visitResult->num_rows === 0) {
                 $lastVisit = "Pierwsza wizyta";  // Wartość domyślna dla nowych użytkowników
                 $visitCount = 1; // Liczba wizyt to 1
+                // Dodajemy nowy rekord w tabeli
+                $sqlInsertVisit = "INSERT INTO visit_counts (USERID, visit_count) VALUES (?, 1)";
+                $conn->prepare($sqlInsertVisit)->execute();
             } else {
                 // Jeśli użytkownik ma rekord w tabeli, sprawdzamy, kiedy była ostatnia wizyta
                 $visitData = $visitResult->fetch_assoc();
@@ -96,10 +99,39 @@ if (isset($_SESSION['username'])) {
                 $visitCount = $visitData['visit_count'];
             }
 
-            // Liczba wizyt przez wszystkich użytkowników
+            // Obliczamy poziom użytkownika (co 10 zalogowań poziom rośnie)
+            $level = floor($visitCount / 10);  // Co 10 logowań poziom wzrasta
+            $progress = ($visitCount % 10) * 10;  // Procentowy postęp paska (0-100%)
+
+            // Wyświetlanie danych
+            echo "<div class='settingsheaderdiv'>";
+            echo '<link rel="stylesheet" type="text/css" href="gamelikecss.css">
+            <link rel="stylesheet" type="text/css" href="profilelist.css">
+            <style>
+            .level-bar-container {
+                width: 100%; background: #ddd; height: 20px; border-radius: 10px; overflow: hidden;
+            }
+            .level-bar {
+                height: 100%; background: #4caf50; width: 50%; transition: width 0.5s ease;
+            }
+                </style>
+            <div class="tipsmaindiv">
+            ';
+            echo "<h1>Witaj, " . $_SESSION['username'] . "!</h1>";
+            echo "<p><h2>Aktualny e-mail: " . $userEmail . "</p>";
+            echo "<p>Liczba Twoich wizyt: " . $visitCount . "</p>";
+            echo "<p>Ostatnia wizyta: " . $lastVisit . "</p>";
+
+            // Wyświetlamy level bar
+            echo "<div class='level-bar-container'>";
+            echo "<div class='level-bar' style='width: $progress%;'></div>";
+            $image_level = min($level, 25);  // Poziom nie przekroczy 25
+            echo "<img src='ranksystem/level$image_level.png' alt='level' width='50px' height='50px'>";
+            echo "</div>";
+
+            // Wyświetlamy globalny licznik odwiedzin
             $sqlGlobalVisitCount = "SELECT total_visits FROM global_visit_count LIMIT 1";
             $resultGlobal = $conn->query($sqlGlobalVisitCount);
-
             if ($resultGlobal->num_rows > 0) {
                 $globalVisitData = $resultGlobal->fetch_assoc();
                 $globalVisits = $globalVisitData['total_visits'];
@@ -111,17 +143,6 @@ if (isset($_SESSION['username'])) {
             }
 
             // Wyświetlamy dane
-            echo "<div style='' class='settingsheaderdiv'>";
-            echo '<link rel="stylesheet" type="text/css" href="gamelikecss.css">
-            <link rel="stylesheet" type="text/css" href="profilelist.css">
-            <div class="tipsmaindiv">
-            ';
-            echo "<h1>Witaj, " . $_SESSION['username'] . "!</h1>";
-            echo "<p><h2>Aktualny e-mail: " . $userEmail . "</p>";
-            echo "<p>Liczba Twoich wizyt: " . $visitCount . "</p>";
-            echo "<p>Ostatnia wizyta: " . $lastVisit . "</p>";
-
-            // Wyświetlamy globalny licznik odwiedzin
             echo "<p>Globalny licznik odwiedzin: " . $globalVisits . "</p>";
 
             // Wyświetlamy aktualną datę i godzinę
@@ -145,36 +166,13 @@ if (isset($_SESSION['username'])) {
             }, 1000);
             </script>";
         } else {
-            // Jeśli użytkownik nie ma odpowiedniej roli, wyświetlamy komunikat o braku dostępu
-            echo '  <link rel="stylesheet" type="text/css" href="gamelikecss.css">
-                            <link rel="stylesheet" type="text/css" href="profilelist.css">
-                            <div class="tipsmaindiv">
-                            <div class="tip-box">
-                                <h2>Dodaj adres EMAIL, aby uzyskać rolę USER+!</h2>
-                            </div>
-                            </div>';
+            echo "Brak dostępu. Twoja rola nie pozwala na przeglądanie tej strony.";
         }
-    } else {
-        // Jeśli użytkownik nie istnieje w bazie
-        echo '  <link rel="stylesheet" type="text/css" href="gamelikecss.css">
-                            <link rel="stylesheet" type="text/css" href="profilelist.css">
-                            <div class="tipsmaindiv">
-                            <div class="tip-box">
-                                <h2>Użytkownik nie istnieje!</h2>
-                            </div>
-                            </div>';
     }
 
     $stmt->close();
     $mysqli->close();
 } else {
-    // Jeśli użytkownik nie jest zalogowany
-    echo '  <link rel="stylesheet" type="text/css" href="gamelikecss.css">
-                            <link rel="stylesheet" type="text/css" href="profilelist.css">
-                            <div class="tipsmaindiv">
-                            <div class="tip-box">
-                                <h2>Zaloguj się!</h2>
-                            </div>
-                            </div>';
+    echo "Musisz być zalogowany, aby zobaczyć tę stronę.";
 }
 ?>

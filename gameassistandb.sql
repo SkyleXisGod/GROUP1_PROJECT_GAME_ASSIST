@@ -339,7 +339,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `championsabilities`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `championsabilities`  AS SELECT `c`.`NAME` AS `NAME`, `ac`.`NAME` AS `ability_c`, `ae`.`NAME` AS `ability_e`, `aq`.`NAME` AS `ability_q`, `ax`.`NAME` AS `ability_x` FROM ((((`gameassistandb`.`champs` `c` join `gameassistandb`.`ability_c` `ac` on(`c`.`ABILITY_C` = `ac`.`ID`)) join `gameassistandb`.`ability_e` `ae` on(`c`.`ABILITY_E` = `ae`.`ID`)) join `ggameassistandb`.`ability_q` `aq` on(`c`.`ABILITY_Q` = `aq`.`ID`)) join `gameassistandb`.`ability_x` `ax` on(`c`.`ABILITY_X` = `ax`.`ID`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `championsabilities`  AS SELECT `c`.`NAME` AS `NAME`, `ac`.`NAME` AS `ability_c`, `ae`.`NAME` AS `ability_e`, `aq`.`NAME` AS `ability_q`, `ax`.`NAME` AS `ability_x` FROM ((((`gameassistandb`.`champs` `c` join `gameassistandb`.`ability_c` `ac` on(`c`.`ABILITY_C` = `ac`.`ID`)) join `gameassistandb`.`ability_e` `ae` on(`c`.`ABILITY_E` = `ae`.`ID`)) join `gameassistandb`.`ability_q` `aq` on(`c`.`ABILITY_Q` = `aq`.`ID`)) join `gameassistandb`.`ability_x` `ax` on(`c`.`ABILITY_X` = `ax`.`ID`)) ;
 
 -- --------------------------------------------------------
 
@@ -513,7 +513,7 @@ ALTER TABLE `roles`
 ALTER TABLE `users`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
---
+--gameassistandb
 -- Constraints for dumped tables
 --
 

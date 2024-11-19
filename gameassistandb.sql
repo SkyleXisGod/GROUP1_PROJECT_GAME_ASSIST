@@ -146,13 +146,6 @@ CREATE TABLE `global_visit_count` (
   `total_visits` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `global_visit_count`
---
-
-INSERT INTO `global_visit_count` (`total_visits`) VALUES
-(47);
-
 -- --------------------------------------------------------
 
 --
@@ -164,12 +157,6 @@ CREATE TABLE `profilepics` (
   `PROFILEPICFILE` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `profilepics`
---
-
-INSERT INTO `profilepics` (`USERID`, `PROFILEPICFILE`) VALUES
-(7, 'uploads/672e59a87fc466.16850363.jpg');
 
 -- --------------------------------------------------------
 
@@ -323,12 +310,6 @@ CREATE TABLE `user_info` (
   `ADDITIONAL_INFO` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `user_info`
---
-
-INSERT INTO `user_info` (`USER_ID`, `ADDITIONAL_INFO`) VALUES
-(7, 'kaperzagloba22@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -342,13 +323,6 @@ CREATE TABLE `visit_counts` (
   `visit_count` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `visit_counts`
---
-
-INSERT INTO `visit_counts` (`USERID`, `last_visit`, `visit_count`) VALUES
-(7, '2024-11-08 19:45:34', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -356,7 +330,7 @@ INSERT INTO `visit_counts` (`USERID`, `last_visit`, `visit_count`) VALUES
 --
 DROP TABLE IF EXISTS `administratorcount`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `administratorcount`  AS SELECT count(`u`.`ID`) AS `Administrator` FROM `gadb_test`.`users` AS `u` WHERE `u`.`ROLEID` = '1' ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `administratorcount`  AS SELECT count(`u`.`ID`) AS `Administrator` FROM `gameassistandb`.`users` AS `u` WHERE `u`.`ROLEID` = '1' ;
 
 -- --------------------------------------------------------
 
@@ -365,7 +339,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `championsabilities`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `championsabilities`  AS SELECT `c`.`NAME` AS `NAME`, `ac`.`NAME` AS `ability_c`, `ae`.`NAME` AS `ability_e`, `aq`.`NAME` AS `ability_q`, `ax`.`NAME` AS `ability_x` FROM ((((`gadb_test`.`champs` `c` join `gadb_test`.`ability_c` `ac` on(`c`.`ABILITY_C` = `ac`.`ID`)) join `gadb_test`.`ability_e` `ae` on(`c`.`ABILITY_E` = `ae`.`ID`)) join `gadb_test`.`ability_q` `aq` on(`c`.`ABILITY_Q` = `aq`.`ID`)) join `gadb_test`.`ability_x` `ax` on(`c`.`ABILITY_X` = `ax`.`ID`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `championsabilities`  AS SELECT `c`.`NAME` AS `NAME`, `ac`.`NAME` AS `ability_c`, `ae`.`NAME` AS `ability_e`, `aq`.`NAME` AS `ability_q`, `ax`.`NAME` AS `ability_x` FROM ((((`gameassistandb`.`champs` `c` join `gameassistandb`.`ability_c` `ac` on(`c`.`ABILITY_C` = `ac`.`ID`)) join `gameassistandb`.`ability_e` `ae` on(`c`.`ABILITY_E` = `ae`.`ID`)) join `ggameassistandb`.`ability_q` `aq` on(`c`.`ABILITY_Q` = `aq`.`ID`)) join `gameassistandb`.`ability_x` `ax` on(`c`.`ABILITY_X` = `ax`.`ID`)) ;
 
 -- --------------------------------------------------------
 

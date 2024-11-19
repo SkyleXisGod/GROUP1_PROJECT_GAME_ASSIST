@@ -85,7 +85,8 @@ $lockedIcon = '';
 $linkHref = 'siteinformations.php';
 $linkClass = '';
 
-if ($role_id != 3) {
+    // Jeśli użytkownik nie ma roli user+/admin (role_id == 2), blokujemy dostęp do statystyk
+    if ($role_id == 2) {
     $lockedIcon = '<img src="lock-icon.png" alt="Locked" style="width: 16px; height: 16px; margin-left: 5px;">';
     $linkHref = '#';
     $linkClass = 'locked-link';

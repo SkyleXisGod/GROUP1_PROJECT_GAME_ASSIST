@@ -90,7 +90,7 @@ $conn->close();
                         // Jeśli użytkownik istnieje i ma zdjęcie profilowe
                         if ($result->num_rows > 0) {
                             $row = $result->fetch_assoc();
-                            $profilePic = $row['PROFILEPICFILE'] ? $row['PROFILEPICFILE'] : 'https://via.placeholder.com/50'; // Jeśli nie ma zdjęcia, używamy placeholdera
+                            $profilePic = $row['PROFILEPICFILE'] ? 'data:image/jpeg;base64,' . base64_encode($row['PROFILEPICFILE']) : 'https://via.placeholder.com/50';
                         } else {
                             // Jeśli brak zdjęcia profilowego, ustawiamy placeholder
                             $profilePic = 'https://via.placeholder.com/50';

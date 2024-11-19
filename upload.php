@@ -51,66 +51,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profilepic'])) {
             $allowedExt = ['jpg', 'jpeg', 'png', 'gif'];
             
             if (in_array($fileExt, $allowedExt)) {
-                // Generujemy nową nazwę pliku
-                $newFileName = uniqid('', true) . '.' . $fileExt;
-                $uploadDir = 'uploads/';  // Katalog, do którego będą przesyłane zdjęcia
-                $fileDestination = $uploadDir . $newFileName;
+                // Odczytujemy zawartość pliku
+                $fileContent = file_get_contents($fileTmpName);
 
-                // Przenosimy plik do docelowego katalogu
-                if (move_uploaded_file($fileTmpName, $fileDestination)) {
-                    // Sprawdzamy, czy użytkownik już ma zapisane zdjęcie w tabeli
-                    $sqlCheck = "SELECT * FROM profilepics WHERE USERID = ?";
-                    $stmtCheck = $conn->prepare($sqlCheck);
-                    $stmtCheck->bind_param('i', $userId);
-                    $stmtCheck->execute();
-                    $resultCheck = $stmtCheck->get_result();
+                // Sprawdzamy, czy użytkownik już ma zapisane zdjęcie w tabeli
+                $sqlCheck = "SELECT * FROM profilepics WHERE USERID = ?";
+                $stmtCheck = $conn->prepare($sqlCheck);
+                $stmtCheck->bind_param('i', $userId);
+                $stmtCheck->execute();
+                $resultCheck = $stmtCheck->get_result();
 
-                    if ($resultCheck->num_rows > 0) {
-                        // Jeśli zdjęcie już istnieje, aktualizujemy je
-                        $sqlUpdate = "UPDATE profilepics SET PROFILEPICFILE = ? WHERE USERID = ?";
-                        $stmtUpdate = $conn->prepare($sqlUpdate);
-                        $stmtUpdate->bind_param('si', $fileDestination, $userId);
-                        $stmtUpdate->execute();
-                    } else {
-                        // Jeśli zdjęcie jeszcze nie istnieje, dodajemy nowe
-                        $sqlInsert = "INSERT INTO profilepics (USERID, PROFILEPICFILE) VALUES (?, ?)";
-                        $stmtInsert = $conn->prepare($sqlInsert);
-                        $stmtInsert->bind_param('is', $userId, $fileDestination);
-                        $stmtInsert->execute();
-                    }
-
-                    
-                    // Potwierdzenie sukcesu
-                    echo '  <link rel="stylesheet" type="text/css" href="gamelikecss.css">
-                            <link rel="stylesheet" type="text/css" href="profilelist.css">
-                            <div class="tipsmaindiv">
-                            <div class="tip-box">
-                                <h2>Sukces!</h2>
-                            </div>
-                            </div>
-                    
-                    <script>
-                        // Przekierowanie na index.php po 7 sekundach
-                        setTimeout(function() {
-                            window.location.href = "dashboard.php"; // Zmień na swoją stronę docelową
-                        }, 3000); // 3000 ms = 3 sekund
-                    </script>';
+                if ($resultCheck->num_rows > 0) {
+                    // Jeśli zdjęcie już istnieje, aktualizujemy je
+                    $sqlUpdate = "UPDATE profilepics SET PROFILEPICFILE = ? WHERE USERID = ?";
+                    $stmtUpdate = $conn->prepare($sqlUpdate);
+                    $stmtUpdate->bind_param('bi', $fileContent, $userId);
+                    $stmtUpdate->send_long_data(0, $fileContent); // Wysyłamy dane binarne
+                    $stmtUpdate->execute();
                 } else {
-                    echo '  <link rel="stylesheet" type="text/css" href="gamelikecss.css">
-                            <link rel="stylesheet" type="text/css" href="profilelist.css">
-                            <div class="tipsmaindiv">
-                            <div class="tip-box">
-                                <h2>Błąd przesyłu!</h2>
-                            </div>
-                            </div>
-                    
-                    <script>
-                        // Przekierowanie na index.php po 7 sekundach
-                        setTimeout(function() {
-                            window.location.href = "dashboard.php"; // Zmień na swoją stronę docelową
-                        }, 3000); // 3000 ms = 3 sekund
-                    </script>';
+                    // Jeśli zdjęcie jeszcze nie istnieje, dodajemy nowe
+                    $sqlInsert = "INSERT INTO profilepics (USERID, PROFILEPICFILE) VALUES (?, ?)";
+                    $stmtInsert = $conn->prepare($sqlInsert);
+                    $stmtInsert->bind_param('ib', $userId, $fileContent);
+                    $stmtInsert->send_long_data(1, $fileContent); // Wysyłamy dane binarne
+                    $stmtInsert->execute();
                 }
+
+                // Potwierdzenie sukcesu
+                echo '  <link rel="stylesheet" type="text/css" href="gamelikecss.css">
+                        <link rel="stylesheet" type="text/css" href="profilelist.css">
+                        <div class="tipsmaindiv">
+                        <div class="tip-box">
+                            <h2>Sukces!</h2>
+                        </div>
+                        </div>
+                
+                <script>
+                    // Przekierowanie na dashboard.php po 3 sekundach
+                    setTimeout(function() {
+                        window.location.href = "dashboard.php"; // Zmień na swoją stronę docelową
+                    }, 3000); // 3000 ms = 3 sekund
+                </script>';
             } else {
                 echo '  <link rel="stylesheet" type="text/css" href="gamelikecss.css">
                             <link rel="stylesheet" type="text/css" href="profilelist.css">
@@ -121,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profilepic'])) {
                             </div>
                     
                     <script>
-                        // Przekierowanie na index.php po 7 sekundach
+                        // Przekierowanie na dashboard.php po 3 sekundach
                         setTimeout(function() {
                             window.location.href = "dashboard.php"; // Zmień na swoją stronę docelową
                         }, 3000); // 3000 ms = 3 sekund
@@ -137,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profilepic'])) {
                             </div>
                     
                     <script>
-                        // Przekierowanie na index.php po 7 sekundach
+                        // Przekierowanie na dashboard.php po 3 sekundach
                         setTimeout(function() {
                             window.location.href = "dashboard.php"; // Zmień na swoją stronę docelową
                         }, 3000); // 3000 ms = 3 sekund
@@ -153,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profilepic'])) {
                             </div>
                     
                     <script>
-                        // Przekierowanie na index.php po 7 sekundach
+                        // Przekierowanie na dashboard.php po 3 sekundach
                         setTimeout(function() {
                             window.location.href = "dashboard.php"; // Zmień na swoją stronę docelową
                         }, 3000); // 3000 ms = 3 sekund
@@ -169,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profilepic'])) {
                             </div>
                     
                     <script>
-                        // Przekierowanie na index.php po 7 sekundach
+                        // Przekierowanie na dashboard.php po 3 sekundach
                         setTimeout(function() {
                             window.location.href = "dashboard.php"; // Zmień na swoją stronę docelową
                         }, 3000); // 3000 ms = 3 sekund

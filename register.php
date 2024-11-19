@@ -21,7 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt = $pdo->prepare("INSERT INTO USERS (USERNAME, PASSWORD, REG_DATE, ROLEID) VALUES (?, ?, ?, ?)");
     if ($stmt->execute([$username, $password, $data, '2'])) {
         $_SESSION['username'] = $username;
-        header("Location: dashboard.php");
+        session_start();
+        session_unset();
+        session_destroy();
+        header("Location: index.php");
         exit();
     } else {
         die("Błąd rejestracji.");

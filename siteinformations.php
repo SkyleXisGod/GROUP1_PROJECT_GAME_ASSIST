@@ -99,9 +99,6 @@ if (isset($_SESSION['username'])) {
                 $visitCount = $visitData['visit_count'];
             }
 
-            // Obliczamy poziom użytkownika (co 10 zalogowań poziom rośnie)
-            $level = floor($visitCount / 10);  // Co 10 logowań poziom wzrasta
-            $progress = ($visitCount % 10) * 10;  // Procentowy postęp paska (0-100%)
 
             // Wyświetlanie danych
             echo "<div class='settingsheaderdiv'>";
@@ -109,10 +106,24 @@ if (isset($_SESSION['username'])) {
             <link rel="stylesheet" type="text/css" href="profilelist.css">
             <style>
             .level-bar-container {
-                width: 100%; background: #ddd; height: 20px; border-radius: 10px; overflow: hidden;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                width: 100%;
             }
+            
             .level-bar {
-                height: 100%; background: #4caf50; width: 50%; transition: width 0.5s ease;
+                height: 20px;
+                background-color: #4caf50;  /* Zielony kolor */
+                border-radius: 10px;
+                transition: width 2s ease;  /* Płynne przejście szerokości */
+                border: 3px solid #333;  /* Obramówka dla paska postępu */
+            }
+            
+            .level-icon {
+                width: 50px;
+                height: 50px;
+                flex-shrink: 0;
             }
                 </style>
             <div class="tipsmaindiv">
@@ -122,11 +133,23 @@ if (isset($_SESSION['username'])) {
             echo "<p>Liczba Twoich wizyt: " . $visitCount . "</p>";
             echo "<p>Ostatnia wizyta: " . $lastVisit . "</p>";
 
-            // Wyświetlamy level bar
+            // Testowanie aplikacji ( licznik logowań i rank system )
+            /*
+            $visitCount++;
+            $sqlUpdateVisitCount = "UPDATE visit_counts SET visit_count = ? WHERE USERID = ?";
+            $stmtUpdateVisitCount = $conn->prepare($sqlUpdateVisitCount);
+            $stmtUpdateVisitCount->bind_param('ii', $visitCount, $userId);
+            $stmtUpdateVisitCount->execute(); */
+
+            // Obliczanie poziomu i progresu użytkownika
+            $level = floor($visitCount / 10);  // Co 10 wizyt, poziom rośnie
+            $progress = ($visitCount % 10) * 10;  // Procentowy postęp w obrębie poziomu (0-100)
+            
+            // Wyświetlanie poziomu i paska postępu
             echo "<div class='level-bar-container'>";
-            echo "<div class='level-bar' style='width: $progress%;'></div>";
             $image_level = min($level, 25);  // Poziom nie przekroczy 25
-            echo "<img src='ranksystem/level$image_level.png' alt='level' width='50px' height='50px'>";
+            echo "<img src='ranksystem/level$image_level.png' alt='level' width='50px' height='50px'>"; // Ikona poziomu
+            echo "<div class='level-bar' style='width: $progress%;'></div>";  // Pasek postępu
             echo "</div>";
 
             // Wyświetlamy globalny licznik odwiedzin

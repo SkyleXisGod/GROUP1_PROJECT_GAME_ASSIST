@@ -262,6 +262,16 @@ $linkClass = '';
         .champ-card .ability {
             margin-bottom: 5px;
         }   
+        .dashboardleftheaderdiv {
+            display: flex;
+            flex-direction: row;
+            align-items: left; /* Wyrównanie w poziomie */
+            justify-content: center; /* Wyrównanie w pionie */
+            height: 100%; /* Upewnij się, że wysokość sekcji zajmuje całą dostępną przestrzeń */
+        }
+        .dashboardleftheaderdiv button {
+            margin-left: 600px; /* Usuwa ewentualne marginesy */
+        }
     </style>
 </head>
 <body>
@@ -271,7 +281,7 @@ $linkClass = '';
     <div class="dashboardleftheaderdiv">
         <img src="radiant-rank.png" style="width: 75px;height: 75px;"><br><br>
         <h5 class="glow2">SkillShot Academy</h5><br>
-        <button style="align-self: center;" onclick='window.location.href="dashboard.php"'>Przejdź do Dashboard</button>
+        <button onclick='window.location.href="dashboard.php"'>Przejdź do Dashboard</button>
     </div>
     <div class="dashboardmidheaderdiv">
     <div class="search-container">

@@ -149,17 +149,142 @@ $linkClass = '';
     <link rel="stylesheet" type="text/css" href="profilelist.css">
     <link rel="shortcut icon" href="radiant-rank.png">
     <script src="profilelist.js"></script>
+    <script>
+        const cardContainer = document.getElementById('cardContainer');
+        let isDragging = false;
+        let startX;
+        let scrollLeft;
+
+        cardContainer.addEventListener('wheel', (e) => {
+            // Zatrzymaj domyślne zachowanie przewijania strony
+            e.preventDefault();
+
+            // Ustal kierunek przewijania
+            const scrollAmount = e.deltaY < 0 ? -100 : 100;  // Ustawienie o ile ma przesunąć się kontener
+
+            // Przesunięcie w poziomie
+            cardContainer.scrollLeft += scrollAmount;  // Zmieniamy scrollLeft w zależności od kierunku scrolla
+        });
+
+        cardContainer.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            cardContainer.classList.add('active'); // Opcjonalnie zmień styl kursora
+            startX = e.pageX - cardContainer.offsetLeft;
+            scrollLeft = cardContainer.scrollLeft;
+        });
+
+        cardContainer.addEventListener('mouseleave', () => {
+            isDragging = false;
+            cardContainer.classList.remove('active');
+        });
+
+        cardContainer.addEventListener('mouseup', () => {
+            isDragging = false;
+            cardContainer.classList.remove('active');
+        });
+
+        cardContainer.addEventListener('mousemove', (e) => {
+            if (!isDragging) return; // Przerwij, jeśli mysz nie jest wciśnięta
+            e.preventDefault();
+            const x = e.pageX - cardContainer.offsetLeft;
+            const walk = (x - startX) * 1.5; // Współczynnik prędkości przewijania
+            cardContainer.scrollLeft = scrollLeft - walk;
+        });
+
+        function searchAgent() {
+            const searchQuery = document.getElementById('agentSearch').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.champ-card');
+            
+            let found = false;  // Flaga, żeby zatrzymać przewijanie, jeśli znaleziono agenta
+
+            // Iterujemy przez karty agentów
+            cards.forEach(card => {
+                const agentName = card.querySelector('h2').innerText.toLowerCase();
+
+                // Sprawdzamy, czy nazwa agenta pasuje do wyszukiwania
+                if (agentName.includes(searchQuery) && searchQuery !== "") {
+                    if (!found) {
+                        // Przewijamy stronę do pierwszego pasującego agenta
+                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        found = true;  // Zatrzymujemy przewijanie po znalezieniu pierwszego pasującego agenta
+                    }
+                }
+            });
+
+            // Jeśli nic nie zostało znalezione, możemy dodać opcję informowania użytkownika
+            if (!found && searchQuery !== "") {
+                alert("Agent o takiej nazwie nie został znaleziony.");
+            }
+        }
+
+
+    </script>
     <style>
-     .champ-card {
+        body {
+            overflow: hidden; /* Uniemożliwia przewijanie całej strony */
+            margin: 0; /* Usuwa marginesy */
+        }
+
+        #cardContainer {
+            display: flex;
+            overflow-x: auto;  /* Umożliwia przewijanie w poziomie */
+            width: 100%;
+            padding: 20px 0; /* Dodatkowy margines wokół kontenera */
+            scroll-behavior: smooth; /* Płynne przewijanie */
+        }
+
+        /* Stylizacja paska przewijania */
+        #cardContainer::-webkit-scrollbar {
+            width: 8px; /* Szerokość paska przewijania */
+            height: 8px; /* Wysokość paska przewijania (jeśli również przewijasz w pionie) */
+        }
+
+        /* Tło paska przewijania */
+        #cardContainer::-webkit-scrollbar-track {
+            background: #282828;  /* Ciemne tło paska */
+            border-radius: 10px; /* Zaokrąglone rogi paska */
+        }
+
+        /* Uchwyt paska przewijania */
+        #cardContainer::-webkit-scrollbar-thumb {
+            background: #58b8f1; /* Kolor uchwytu (np. niebieski, jak w Twoim stylu) */
+            border-radius: 10px; /* Zaokrąglone rogi uchwytu */
+        }
+
+        /* Efekt na uchwycie paska przewijania podczas interakcji */
+        #cardContainer::-webkit-scrollbar-thumb:hover {
+            background: #3498db;  /* Zmiana koloru uchwytu na jaśniejszy po najechaniu */
+        }
+
+        /* Dodatkowa konfiguracja dla innych przeglądarek */
+        #cardContainer {
+            scrollbar-width: thin; /* Działa w Firefoxie */
+            scrollbar-color: #58b8f1 #282828;  /* Kolor uchwytu i tła paska w Firefoxie */
+        }
+
+        .submaindiv {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            width: 100%;
+            height: 90%;
+            justify-content: flex-start;
+            overflow: hidden; /* Zapewnia, że zawartość nie wychodzi poza obszar */
+        }
+
+        .champ-card {
             background-color: #282828;
             border: 1px solid #58b8f1;
             border-radius: 10px;
-            padding: 20px;
-            margin: 10px;
+            padding: 10px;
+            margin: 5px;
             color: white;
-            width: 600px;
+            max-width: 500px;
+            min-width: 500px;
+            height: auto;
             text-align: center;
             box-shadow: 0 0 10px #58b8f1;
+            flex-shrink: 0; /* Zapewnia, że karty nie będą się kurczyć */
         }
         .champ-card img {
             width: 100%;
@@ -177,17 +302,6 @@ $linkClass = '';
         .champ-card .ability {
             margin-bottom: 5px;
         }   
-    .submaindiv {
-        background: transparent;
-        box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 82%;
-        display: flex;
-        flex-direction: row;
-        gap: 20px;  /* Dodajemy odstęp pomiędzy wyspami */
-    }
     </style>
 </head>
 <body>
@@ -198,6 +312,10 @@ $linkClass = '';
         <img src="radiant-rank.png" style="width: 75px;height: 75px;"><br><br>
         <h5 class="glow2">SkillShot Academy</h5><br>
     </div>
+    <div class="dashboardmidheaderdiv">
+    <div class="search-container">
+    <input type="text" id="agentSearch" placeholder="Wyszukaj agenta..." onkeyup="searchAgent()">
+    </div></div>
     <div class="dashboardrightheaderdiv">
         <!-- Sekcja profilowa z rozwijalnym menu ustawień -->
         <div class="profile-container">
@@ -220,11 +338,12 @@ $linkClass = '';
         </div>
     </div>
 </div>
-<div class="submaindiv">
+
+<div class="submaindiv" id="cardContainer">
     <?php foreach ($champs as $champ): ?>
-        <div class="champ-card">
+        <div class="champ-card" id="agent-<?php echo $champ['champ_id']; ?>">
             <h2><?php echo htmlspecialchars($champ['champ_name']); ?></h2>
-            <img src="agent_images/<?php echo $champ['champ_id']; ?>.png" style="width: 100px; heigth: 100px;" alt="Agent Image">
+            <img src="agent_images/<?php echo $champ['champ_id']; ?>.png" style="width: 100px; height: 100px;" alt="Agent Image">
             <p><?php echo htmlspecialchars($champ['champ_description']); ?>
             <strong>Rola:</strong> <?php echo htmlspecialchars($champ['champ_role']); ?></p>
 
@@ -241,49 +360,34 @@ $linkClass = '';
 
                 <div class="ability">
                     <?php if ($ability_c): ?>
-                        <img class="ability-icon" src="ability_c/<?php echo $champ['champ_id']; ?>.png" style="width: 60px; heigth: 60px;" alt="C Ability">
+                        <img class="ability-icon" src="ability_c/<?php echo $champ['champ_id']; ?>.png" style="width: 60px; height: 60px;" alt="C Ability">
                         <p><strong>C:</strong> <?php echo htmlspecialchars($ability_c['DESCRIPTION']); ?></p>
                     <?php endif; ?>
                 </div>
 
                 <div class="ability">
                     <?php if ($ability_q): ?>
-                        <img class="ability-icon" src="ability_q/<?php echo $champ['champ_id']; ?>.png" style="width: 60px; heigth: 60px;" alt="Q Ability">
+                        <img class="ability-icon" src="ability_q/<?php echo $champ['champ_id']; ?>.png" style="width: 60px; height: 60px;" alt="Q Ability">
                         <p><strong>Q:</strong> <?php echo htmlspecialchars($ability_q['DESCRIPTION']); ?></p>
                     <?php endif; ?>
                 </div>
 
                 <div class="ability">
                     <?php if ($ability_e): ?>
-                        <img class="ability-icon" src="ability_e/<?php echo $champ['champ_id']; ?>.png" style="width: 60px; heigth: 60px;" alt="E Ability">
+                        <img class="ability-icon" src="ability_e/<?php echo $champ['champ_id']; ?>.png" style="width: 60px; height: 60px;" alt="E Ability">
                         <p><strong>E:</strong> <?php echo htmlspecialchars($ability_e['DESCRIPTION']); ?></p>
                     <?php endif; ?>
                 </div>
 
                 <div class="ability">
                     <?php if ($ability_x): ?>
-                        <img class="ability-icon" src="ability_x/<?php echo $champ['champ_id']; ?>.png" style="width: 60px; heigth: 60px;" alt="X Ability">
+                        <img class="ability-icon" src="ability_x/<?php echo $champ['champ_id']; ?>.png" style="width: 60px; height: 60px;" alt="X Ability">
                         <p><strong>X:</strong> <?php echo htmlspecialchars($ability_x['DESCRIPTION']); ?></p>
                     <?php endif; ?>
                 </div>
             </div>
         </div>
     <?php endforeach; ?>
-</div>
-
-    <!-- Stopka -->
-    <div class="dashboardfooterdiv">
-    <div class="dashboardfooterdivleft">
-        <h2> 
-        <b><i> I N F O: </b></i><br>
-        </h2>
-    </div>
-    <div class="dashboardfooterdivright">
-        <a class="linkbut" href="faqindex.html"><img alt="faq-link" src="faq-logo.png" style="width: 60px; height: 50px;"></a><br><br>
-        <a class="linkbut" href="https://discord.gg/JjmAzzcxsh"><img alt="discord-server-link" src="discord-logo.png" style="width: 50px; height: 30px;"></a><br><br>
-        <a class="linkbut" href="https://www.riotgames.com/pl"><img alt="riot-games-link" src="riot-logo.png" style="width: 50px; height: 50px;"></a><br><br>
-        <a class="linkbut" href="https://playvalorant.com/pl-pl/?utm_medium=card2%2Bwww.riotgames.com&utm_source=riotbar"><img alt="valorant-link" src="valorant-logo.png" style="width: 70px; height: 40px;"></a><br><br>
-    </div>
 </div>
 
 </body>

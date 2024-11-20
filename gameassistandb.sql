@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lis 19, 2024 at 02:02 PM
+-- Generation Time: Lis 20, 2024 at 12:56 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -34,6 +34,37 @@ CREATE TABLE `ability_c` (
   `SHOWCASE` longblob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `ability_c`
+--
+
+INSERT INTO `ability_c` (`ID`, `NAME`, `DESCRIPTION`, `SHOWCASE`) VALUES
+(1, 'Stim Beacon', 'Używa urządzenia stymulującego, które przyspiesza tempo strzelania sojuszników w jego pobliżu.', 0x6b6c697020747a772e2073686f7763617365),
+(2, 'Blaze', 'Wytwarza barierę ognia, która blokuje widoczność i rani wrogów w jej zasięgu.', 0x747a772e2073686f7763617365),
+(3, 'Barrier Orb', 'Tworzy solidną barierę, która blokuje wrogów i kontroluje przestrzeń.', 0x6b6c697020747a772e2073686f7763617365),
+(4, 'Owl Drone', 'Wystrzeliwuje drona, którym można sterować, aby oznaczać wrogów za pomocą pocisku śledzącego.', 0x6b6c697020747a772e2073686f7763617365),
+(5, 'Snake Bite', 'Wystrzeliwuje ampułkę chemiczną, która po uderzeniu tworzy trujące pole zadające obrażenia wrogom.', 0x6b6c697020747a772e2073686f7763617365),
+(6, 'Tripwire', 'Cypher instaluje niewidoczną linię, która po aktywacji przez wroga powoduje unieruchomienie i stunuj', 0x6b6c697020747a772e2073686f7763617365),
+(7, 'Leer', 'Reyna rzuca magiczny obiekt, który przesłania wizję wrogów w obszarze, w którym się znajduje.', 0x6b6c697020747a772e2073686f7763617365),
+(8, 'Nanoswarm', 'Killjoy rzuca granat, który wybucha, zadając obrażenia wrogom w zasięgu, tworząc pole magnetyczne.', 0x6b6c697020747a772e2073686f7763617365),
+(9, 'Aftershock', 'Breach wystrzeliwuje ładunek, który eksploduje, zadając obrażenia wrogom w jego zasięgu.', 0x6b6c697020747a772e2073686f7763617365),
+(10, 'Shrouded Step', 'Omen teleportuje się na krótki dystans w wybrane miejsce, znikając z widoku na moment.', 0x6b6c697020747a772e2073686f7763617365),
+(11, 'Boom Bot', 'Raze wystrzeliwuje robota, który porusza się po powierzchni, wykrywając wrogów i wybuchając.', 0x6b6c697020747a772e2073686f7763617365),
+(12, 'Cloudburst', 'Jett wystrzeliwuje chmurę dymu, która zasłania widoczność w określonym obszarze.', 0x6b6c697020747a772e2073686f7763617365),
+(13, 'Regrowth', 'Skye używa mocy do leczenia sojuszników w zasięgu lub samej siebie.', 0x6b6c697020747a772e2073686f7763617365),
+(14, 'Fakeout', 'Yoru rzuca fałszywą kopię siebie, która emituje dźwięk, myląc wrogów.', 0x6b6c697020747a772e2073686f7763617365),
+(15, 'FRAG/ment', 'KAY/O rzuca granat, który dzieli się na fragmenty, zadając obrażenia wrogom w jego zasięgu.', 0x6b6c697020747a772e2073686f7763617365),
+(16, 'Gravity Well', 'Astra tworzy strefę, która wciąga wrogów, a potem wybucha, zadając obrażenia tymczasowe.', 0x6b6c697020747a772e2073686f7763617365),
+(17, 'Trademark', 'Chamber instaluje niewidoczny drut, który powoduje unieruchomienie wroga po aktywacji.', 0x6b6c697020747a772e2073686f7763617365),
+(18, 'Fast Lane', 'Neon tworzy dwie linie błyskawicy, które przechodzą przez przeszkody.', 0x6b6c697020747a772e2073686f7763617365),
+(19, 'Prowler', 'Fade wysyła stwora, który ściga i oślepia wrogów, zwiększając ich podatność na ataki.', 0x6b6c697020747a772e2073686f7763617365),
+(20, 'Cascade', 'Wytwarza ruchomą ścianę wody, która spowalnia przeciwników.', 0x6b6c697020747a772e2073686f7763617365),
+(21, 'Mosh Pit', 'Rzuca bombę, która eksploduje, zadając obrażenia po czasie.', 0x6b6c697020747a772e2073686f7763617365),
+(22, 'GravNet', 'Rzuca sieć grawitacyjną, która unieruchamia przeciwników.', 0x6b6c697020747a772e2073686f7763617365),
+(23, 'Undercut', 'Rzuca ostrze energetyczne, które podwaja obrażenia na przeciwnikach w obszarze.', 0x6b6c697020747a772e2073686f7763617365),
+(24, 'Pick-me-up', 'Po zabiciu wroga może wyleczyć się na chwilę do maksymalnego życia.', 0x6b6c697020747a772e2073686f7763617365),
+(25, 'Razorvine', 'Rzuca na ziemię pułapkę, która po aktywacji zamienia się w pole zadające obrażenia podczas ruchu.', 0x6b6c697020747a772e2073686f7763617365);
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +77,37 @@ CREATE TABLE `ability_e` (
   `DESCRIPTION` varchar(100) NOT NULL,
   `SHOWCASE` longblob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ability_e`
+--
+
+INSERT INTO `ability_e` (`ID`, `NAME`, `DESCRIPTION`, `SHOWCASE`) VALUES
+(1, 'Sky Smokes', 'Rzuca dym, który blokuje widoczność, pozwalając na kontrolowanie przestrzeni.', 0x6b6c697020747a772e2073686f7763617365),
+(2, 'Hot Hands', 'Rzuca ognisty pocisk, który leczy Phoenixa lub zadaje obrażenia wrogom w jego zasięgu.', 0x6b6c697020747a772e2073686f7763617365),
+(3, 'Healing Orb', 'Leczy sojusznika lub siebie w czasie rzeczywistym.', 0x6b6c697020747a772e2073686f7763617365),
+(4, 'Recon Bolt', 'Wystrzeliwuje strzałę, która ujawnia wrogów w jej zasięgu widzenia.', 0x6b6c697020747a772e2073686f7763617365),
+(5, 'Toxic Screen', 'Rozstawia rząd emitujących gaz urządzeń, które po aktywacji tworzą ścianę toksycznego gazu.', 0x6b6c697020747a772e2073686f7763617365),
+(6, 'Spycam', 'Cypher instaluje kamerę, którą można aktywować, by uzyskać widok na otoczenie i oznaczyć wrogów.', 0x6b6c697020747a772e2073686f7763617365),
+(7, 'Dismissing', 'Reyna może teleportować się na krótką odległość, aby unikać ataków lub poprawić swoją pozycję.', 0x6b6c697020747a772e2073686f7763617365),
+(8, 'Turret', 'Killjoy rozmieszcza małą wieżyczkę, która automatycznie wykrywa i ostrzega przed wrogami w zasięgu.', 0x6b6c697020747a772e2073686f7763617365),
+(9, 'Quake', 'Breach wystrzeliwuje falę energii, która ogłusza wrogów w jej zasięgu.', 0x6b6c697020747a772e2073686f7763617365),
+(10, 'Dark Cover', 'Omen tworzy kulę cienia, którą może kontrolować, aby zasłonić widoczność na określonym obszarze.', 0x6b6c697020747a772e2073686f7763617365),
+(11, 'Paint Shells', 'Raze wyrzuca granat, który eksploduje na małe kawałki, zadając obrażenia wrogom w ich zasięgu.', 0x6b6c697020747a772e2073686f7763617365),
+(12, 'Tailwind', 'Jett wykonuje błyskawiczny ruch w określonym kierunku, dzięki czemu może szybko zmieniać pozycję.', 0x6b6c697020747a772e2073686f7763617365),
+(13, 'Guiding Light', 'Skye steruje ptakiem, który eksploduje, oślepiając wrogów w pobliżu.', 0x6b6c697020747a772e2073686f7763617365),
+(14, 'Gatecrash', 'Yoru wysyła portal w określony punkt, który może przejść, teleportując się do niego.', 0x6b6c697020747a772e2073686f7763617365),
+(15, 'ZERO/point', 'KAY/O wysyła urządzenie, które wyłącza umiejętności wrogów w danym obszarze.', 0x6b6c697020747a772e2073686f7763617365),
+(16, 'Nebula', 'Astra tworzy dymną zasłonę, która blokuje widoczność, zmieniając pole bitwy.', 0x6b6c697020747a772e2073686f7763617365),
+(17, 'Rendezvous', 'Chamber tworzy punkt teleportacji, który umożliwia mu szybkie przemieszczanie się po mapie.', 0x6b6c697020747a772e2073686f7763617365),
+(18, 'High Gear', 'Neon wyzwala z siebie energię co umożliwia jej bieganie.', 0x6b6c697020747a772e2073686f7763617365),
+(19, 'Haunt', 'Fade rzuca oko, który prześladuje wrogów, i oznacza ich przez ścianę. Można robić combo z prowler.', 0x6b6c697020747a772e2073686f7763617365),
+(20, 'High Tide', 'Rozstawia zakrzywioną ścianę wody, blokując widoczność.', 0x6b6c697020747a772e2073686f7763617365),
+(21, 'Wingman', 'Wysyła stworzenie, które może rozbrajać lub podkładać spike i stunować.', 0x6b6c697020747a772e2073686f7763617365),
+(22, 'Barrier Mesh', 'Tworzy barierę w kształcie X, która blokuje wrogów.', 0x6b6c697020747a772e2073686f7763617365),
+(23, 'Contingency Shield', 'Rzuca wolną tarczę do przodu, która absorbuje obrażenia.', 0x6b6c697020747a772e2073686f7763617365),
+(24, 'Ruse', 'Tworzy zasłonę dymną, w środku której dźwięki są lekko przytłumione.', 0x6b6c697020747a772e2073686f7763617365),
+(25, 'Arc Rose', 'Tworzy różę, umożliwia oślepienie wroga.', 0x6b6c697020747a772e2073686f7763617365);
 
 -- --------------------------------------------------------
 
@@ -60,6 +122,37 @@ CREATE TABLE `ability_q` (
   `SHOWCASE` longblob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `ability_q`
+--
+
+INSERT INTO `ability_q` (`ID`, `NAME`, `DESCRIPTION`, `SHOWCASE`) VALUES
+(1, 'Incendiary', 'Wystrzela granat zapalający, który tworzy pole ognia, zadające obrażenia w zasięgu.', 0x747a772e2073686f7763617365),
+(2, 'Curveball', 'Rzuca granat błyskowy, który oślepia przeciwników w jego zasięgu.', 0x6b6c697020747a772e2073686f7763617365),
+(3, 'Slow Orb', 'Rzuca kulę, która tworzy pole spowalniające ruch wrogów w zasięgu.', 0x6b6c697020747a772e2073686f7763617365),
+(4, 'Shock Bolt', 'Wystrzeliwuje strzałę, która eksploduje, zadając obrażenia wrogom w obszarze eksplozji.', 0x6b6c697020747a772e2073686f7763617365),
+(5, 'Poison Cloud', 'Rzuca granat chemiczny, który po aktywacji tworzy toksyczną chmurę gazu.', 0x6b6c697020747a772e2073686f7763617365),
+(6, 'Cyber Cage', 'Cypher rzuca pułapkę, która blokując widoczność powoduje dźwięk przy wchodzeniu w nią.', 0x6b6c697020747a772e2073686f7763617365),
+(7, 'Soul Orbs', 'Po zabiciu wroga, Reyna może zebrać dusze, które pozwalają na natychmiastowe leczenie.', 0x6b6c697020747a772e2073686f7763617365),
+(8, 'Alarmbot', 'Rozstawia pułapkę, która po aktywacji wybucha, nakładając osłabienie.', 0x6b6c697020747a772e2073686f7763617365),
+(9, 'Flashpoint', 'Breach wystrzeliwuje ładunek, który oślepia wrogów w linii wzroku.', 0x6b6c697020747a772e2073686f7763617365),
+(10, 'Paranoia', 'Omen wystrzeliwuje cienie, które przelatują przez ściany, oślepiając wrogów w zasięgu.', 0x6b6c697020747a772e2073686f7763617365),
+(11, 'Blast Pack', 'Raze rzuca ładunek wybuchowy, który może przemieszczać wrogów lub pozwolić na lot Raze.', 0x6b6c697020747a772e2073686f7763617365),
+(12, 'Updraft', 'Jett kumuluję energię, aby wykonać potężny skok w górę, zyskując lepszą widoczność lub unikając.', 0x6b6c697020747a772e2073686f7763617365),
+(13, 'Trailblazer', 'Skye steruje psem, który przeszukuje teren i spowalnia wrogów po skoczeniu na nich.', 0x6b6c697020747a772e2073686f7763617365),
+(14, 'Blindside', 'Yoru wystrzeliwuje kulę, która oślepia wszystkich wrogów w zasięgu.', 0x6b6c697020747a772e2073686f7763617365),
+(15, 'FLASH/drive', 'KAY/O rzuca granat błyskowy, który oślepia wrogów w zasięgu.', 0x6b6c697020747a772e2073686f7763617365),
+(16, 'Nova Pulse', 'Astra tworzy pole, które wybucha po kilku sekundach, ogłuszając wrogów w zasięgu.', 0x6b6c697020747a772e2073686f7763617365),
+(17, 'Headhunter', 'Chamber używa pistoletu, który wystrzeliwuje precyzyjne, śmiertelne strzały.', 0x6b6c697020747a772e2073686f7763617365),
+(18, 'Relay Bolt', 'Neon rzuca pocisk, który odbija się raz od ściany tworząc dwa pola elektryczności, stunując wrogów.', 0x6b6c697020747a772e2073686f7763617365),
+(19, 'Seize', 'Fade rzuca wiązkę, które przyciąga wrogów w określony obszar.', 0x6b6c697020747a772e2073686f7763617365),
+(20, 'Cove', 'Tworzy wodną kopułę chroniącą sojuszników przed ostrzałem.', 0x6b6c697020747a772e2073686f7763617365),
+(21, 'Dizzy', 'Wypuszcza stworzenie, które oślepia wrogów w zasięgu widzenia.', 0x6b6c697020747a772e2073686f7763617365),
+(22, 'Sonic Sensor', 'Instaluje urządzenie wykrywające dźwięk, które stunuje wrogów w zasięgu.', 0x6b6c697020747a772e2073686f7763617365),
+(23, 'Double Tap', 'Aktywuje czasową tarczę, która absorbuje dowolny atak, po zabójstwie można odnowić.', 0x6b6c697020747a772e2073686f7763617365),
+(24, 'Meddle', 'Rzuca kulą, która powoduje rozkład u przeciwnika ( tymczasowy dmg ).', 0x6b6c697020747a772e2073686f7763617365),
+(25, 'Shear', 'To ściana aktywująca się po przejściu przeciwnika przez nią, niezniszczalna.', 0x6b6c697020747a772e2073686f7763617365);
+
 -- --------------------------------------------------------
 
 --
@@ -72,6 +165,37 @@ CREATE TABLE `ability_x` (
   `DESCRIPTION` varchar(100) NOT NULL,
   `SHOWCASE` longblob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ability_x`
+--
+
+INSERT INTO `ability_x` (`ID`, `NAME`, `DESCRIPTION`, `SHOWCASE`) VALUES
+(1, 'Orbital Strike', 'Potężny atak orbitalny, który zadaje ogromne obrażenia w jego obszarze.', 0x6b6c697020747a772e2073686f7763617365),
+(2, 'Run It Back', 'Phoenix używa swojego ulta, aby ponownie się odrodzić w miejscu, w którym został użyty.', 0x6b6c697020747a772e2073686f7763617365),
+(3, 'Resurrection', 'Ożywia upadłego sojusznika z pełnym zdrowiem.', 0x6b6c697020747a772e2073686f7763617365),
+(4, 'Hunter\'s Fury', 'Wystrzeliwuje trzy potężne wiązki energii, które przebijają ściany i oznaczają wrogów.', 0x6b6c697020747a772e2073686f7763617365),
+(5, 'Viper\'s Pit', 'Tworzy ogromną chmurę toksycznego gazu, która utrzymuje się, dopóki Viper pozostaje w jej zasięgu.', 0x6b6c697020747a772e2073686f7763617365),
+(6, 'Neural Theft', 'Cypher kradnie dane z ciała upadłego wroga, ujawniając lokalizacje wszystkich żywych przeciwników.', 0x6b6c697020747a772e2073686f7763617365),
+(7, 'Empress', 'Reyna przechodzi w tryb łowcy co daje zwiększoną szybkość wszystkiego i może używać dusz do woli.', 0x6b6c697020747a772e2073686f7763617365),
+(8, 'Lockdown', 'Killjoy rozmieszcza duży emitujące fale urządzenie, które unieruchamia wrogów po czasie w zasięgu.', 0x6b6c697020747a772e2073686f7763617365),
+(9, 'Rolling thunder', 'Breach wyzwala potężny wstrząs ziemi, który powoduje przemieszczenie i ogłuszenie wrogów w zasięgu.', 0x6b6c697020747a772e2073686f7763617365),
+(10, 'From the Shadows', 'Omen teleportuje się w wybranym miejscu, a jego obecność zostaje ujawniona dopiero po chwili.', 0x6b6c697020747a772e2073686f7763617365),
+(11, 'Showstopper', 'Raze używa potężnej rakietnicy, która wystrzeliwuje rakietę, niszcząc wrogów w obszarze trafienia.', 0x6b6c697020747a772e2073686f7763617365),
+(12, 'Blade Storm', 'Jett aktywuje noże, które mogą być rzucane zadając obrażenia na dużą odległość bez rozrzutu.', 0x6b6c697020747a772e2073686f7763617365),
+(13, 'Seekers', 'Skye wystrzeliwuje trzy \"poszukiwacze\" ( kapusty xD ), które spowalniają i oznaczają wrogów.', 0x6b6c697020747a772e2073686f7763617365),
+(14, 'Dimensional Drift', 'Yoru używa ulta, który pozwala mu przejść do innej rzeczywistości, niewidzialnym dla wrogów.', 0x6b6c697020747a772e2073686f7763617365),
+(15, 'NULL/CMD', 'KAY/O wysyła impuls wyłączający umiejętności przeciwników w obszarze i umożliwia podniesienie go.', 0x6b6c697020747a772e2073686f7763617365),
+(16, 'Astral Form/Cosmic Divide', 'Astra przechodzi w Astral Form przez co może umieszczać umiejętności i ścianę dzielącą mapę ( ult ).', 0x6b6c697020747a772e2073686f7763617365),
+(17, 'Tour de Force', 'Chamber używa snajperki, która eliminuje wrogów jednym precyzyjnym strzałem.', 0x6b6c697020747a772e2073686f7763617365),
+(18, 'Overdrive', 'Neon uruchamia tryb \"overdrive\", który pozwala jej biegać szybciej i wystrzeliwać potężne wiązkę ele', 0x6b6c697020747a772e2073686f7763617365),
+(19, 'Nightfall', 'Fade używa fali ciemności, by przeszukać teren, oznaczyć wrogów i osłabić ich.', 0x6b6c697020747a772e2073686f7763617365),
+(20, 'Reckoning', 'Wywołuje deszcz energii wodnej, oznaczając i osłabiając przeciwników w zasięgu.', 0x6b6c697020747a772e2073686f7763617365),
+(21, 'Thrash', 'Kontroluje stwora, który atakuje i unieruchamia wrogów.', 0x6b6c697020747a772e2073686f7763617365),
+(22, 'Annihilation', 'Wystrzeliwuje pocisk wiążący przeciwnika w kokon, unieruchamiając go.', 0x6b6c697020747a772e2073686f7763617365),
+(23, 'Kill Contract', 'Wyzywa wroga na pojedynek 1v1 w odizolowanej przestrzeni.', 0x6b6c697020747a772e2073686f7763617365),
+(24, 'Not DEAD Yet', 'Umożliwia odrodzenie się chwilowe Clove, w przypadku zabicie przeciwnika, na zawsze.', 0x6b6c697020747a772e2073686f7763617365),
+(25, 'Steel Garden', 'Na określony czas zabiera przeciwnikowi broń główną, można używać noża lub pistoletu.', 0x6b6c697020747a772e2073686f7763617365);
 
 -- --------------------------------------------------------
 
@@ -106,13 +230,44 @@ CREATE TABLE `championsabilities` (
 CREATE TABLE `champs` (
   `ID` int(11) NOT NULL,
   `NAME` varchar(100) NOT NULL,
-  `DESCRIPTION` varchar(100) NOT NULL,
+  `DESCRIPTION` varchar(500) NOT NULL,
   `ROLE` int(11) NOT NULL,
   `ABILITY_C` int(11) NOT NULL,
   `ABILITY_E` int(11) NOT NULL,
   `ABILITY_Q` int(11) NOT NULL,
   `ABILITY_X` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `champs`
+--
+
+INSERT INTO `champs` (`ID`, `NAME`, `DESCRIPTION`, `ROLE`, `ABILITY_C`, `ABILITY_E`, `ABILITY_Q`, `ABILITY_X`) VALUES
+(1, 'Brimstone', 'Brimstone to agent w VALORANT i jeden z pierwszych kontrolerów, wprowadzony od czasu zamkniętej bety.', 2, 1, 1, 1, 1),
+(2, 'Phoenix', 'Phoenix to agent w VALORANT, kontroler ognia, który jest w stanie leczyć siebie oraz zadać wielkie obrażenia.', 1, 2, 2, 2, 2),
+(3, 'Sage', 'Sage to agent wspierający w VALORANT, znana ze swoich zdolności do ochrony i leczenia drużyny.', 4, 3, 3, 3, 3),
+(4, 'Sova', 'Sova to agent zwiadowczy w VALORANT, mistrz w ujawnianiu pozycji wrogów za pomocą zaawansowanych technologii.', 3, 4, 4, 4, 4),
+(5, 'Viper', 'Viper to agentka kontrolująca pole walki w VALORANT, wykorzystująca toksyny do destabilizowania wrogów.', 2, 5, 5, 5, 5),
+(6, 'Cypher', 'Cypher to agent defensywny w VALORANT, specjalizujący się w zbieraniu informacji i kontrolowaniu przestrzeni za pomocą pułapek.', 4, 6, 6, 6, 6),
+(7, 'Reyna', 'Reyna to agent ofensywny w VALORANT, specjalizujący się w eliminowaniu wrogów i leczeniu siebie dzięki swojej zdolności do zbierania dusz.', 1, 7, 7, 7, 7),
+(8, 'Killjoy', 'Killjoy to agentka defensywna w VALORANT, specjalizująca się w zakłócaniu ruchu przeciwnika i kontrolowaniu przestrzeni za pomocą technologii.', 4, 8, 8, 8, 8),
+(9, 'Breach', 'Breach to agent ofensywny w VALORANT, specjalizujący się w wywoływaniu zamieszania i kontrolowaniu wrogów za pomocą potężnych ładunków energetycznych.', 3, 9, 9, 9, 9),
+(10, 'Omen', 'Omen to agent kontroli w VALORANT, specjalizujący się w manipulowaniu widocznością i przeprowadzaniu precyzyjnych teleportacji, by zaskoczyć wrogów.', 2, 10, 10, 10, 10),
+(11, 'Raze', 'Raze to agent ofensywny w VALORANT, specjalizujący się w używaniu wybuchowych narzędzi do zadawania obrażeń i kontrolowania przestrzeni.', 1, 11, 11, 11, 11),
+(12, 'Jett', 'Jett to agent ofensywny w VALORANT, znany ze swojej zwinności i zdolności do manipulowania przestrzenią za pomocą swoich umiejętności.', 1, 12, 12, 12, 12),
+(13, 'Skye', 'Skye to agent wspierający w VALORANT, który wykorzystuje swoje umiejętności do leczenia, spowalniania i oślepiania wrogów.', 3, 13, 13, 13, 13),
+(14, 'Yoru', 'Yoru to agent z wiatrem w rękach w VALORANT, specjalizujący się w wprowadzaniu chaosu i zmyleniu wrogów.', 1, 14, 14, 14, 14),
+(15, 'KAY/O', 'KAY/O to agent, który osłabia i wyłącza umiejętności wrogów, oferując wsparcie drużynie w walce.', 3, 15, 15, 15, 15),
+(16, 'Astra', 'Astra to agent kontrolujący przestrzeń w VALORANT, który może zmieniać pole bitwy za pomocą różnorodnych umiejętności.', 2, 16, 16, 16, 16),
+(17, 'Chamber', 'Chamber to agent w VALORANT, który wykorzystuje precyzyjne umiejętności strzeleckie oraz teleportację do kontrolowania przestrzeni.', 4, 17, 17, 17, 17),
+(18, 'Neon', 'Neon to agent w VALORANT, który wykorzystuje elektryczność do przyspieszania ruchu i zadawania obrażeń.', 1, 18, 18, 18, 18),
+(19, 'Fade', 'Fade to agent w VALORANT, specjalizujący się w manipulacji przestrzenią i osłabianiu wrogów za pomocą ciemności i strachów.', 3, 19, 19, 19, 19),
+(20, 'Harbor', 'Harbor to kontroler, który wykorzystuje wodne zdolności do blokowania przestrzeni i wspierania sojuszników.', 2, 20, 20, 20, 20),
+(21, 'Gekko', 'Gekko to unikalny agent kontrolujący pole walki za pomocą swoich stworków.', 3, 21, 21, 21, 21),
+(22, 'Deadlock', 'Deadlock to agentka defensywna, kontrolująca przestrzeń za pomocą technologii wykrywającej.', 4, 22, 22, 22, 22),
+(23, 'Iso', 'Iso to agent zdominowany przez agresję, wyzywający przeciwników na pojedynki.', 1, 23, 23, 23, 23),
+(24, 'Clove', 'Clove to nieśmiertelny agent, który jest wsparciem dla drużyny.', 2, 24, 24, 24, 24),
+(25, 'Vyse', 'Vyse to agent władający metalami. Postać opiera się na obronie site\'u.', 4, 25, 25, 25, 25);
 
 -- --------------------------------------------------------
 
@@ -139,6 +294,20 @@ INSERT INTO `champ_roles` (`ID`, `ROLE_NAME`, `DESCRIPTION`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `crosshair_screenshots`
+--
+
+CREATE TABLE `crosshair_screenshots` (
+  `ID` int(11) NOT NULL,
+  `USER_ID` int(11) NOT NULL,
+  `IMAGE` blob DEFAULT NULL,
+  `CODE` text DEFAULT NULL,
+  `UPLOAD_DATE` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `global_visit_count`
 --
 
@@ -151,7 +320,7 @@ CREATE TABLE `global_visit_count` (
 --
 
 INSERT INTO `global_visit_count` (`total_visits`) VALUES
-(11);
+(63);
 
 -- --------------------------------------------------------
 
@@ -310,9 +479,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`ID`, `USERNAME`, `PASSWORD`, `REG_DATE`, `ROLEID`) VALUES
-(9, 'admin', '$2y$10$hoGWLeH2o8NStsdNiQIY/uULn9yKD87AHekhz3AlmMY9YUFs6OSJy', '2024-11-19 12:53:49', 2),
+(9, 'admin', '$2y$10$hoGWLeH2o8NStsdNiQIY/uULn9yKD87AHekhz3AlmMY9YUFs6OSJy', '2024-11-19 12:53:49', 1),
 (10, 'userp', '$2y$10$QUcbhJfI6WSxAJRElivtfOayKzSkb0Gq4.mtmR663S/xUaUE5wEpi', '2024-11-19 12:54:14', 3),
-(11, 'user', '$2y$10$2TjhvboJ.O0E2uWTprwoB.7pbu9Gm9ZZJLgSYsiLlLGX9tdJMBTTi', '2024-11-19 12:54:28', 2);
+(11, 'user', '$2y$10$2TjhvboJ.O0E2uWTprwoB.7pbu9Gm9ZZJLgSYsiLlLGX9tdJMBTTi', '2024-11-19 12:54:28', 3),
+(13, '123', '$2y$10$.pWls8dDODTVoXnr7TO8V.jX8ngPZMv9gheGBVg8hPCJ09kbzRO7C', '2024-11-19 18:37:58', 3);
 
 -- --------------------------------------------------------
 
@@ -330,7 +500,10 @@ CREATE TABLE `user_info` (
 --
 
 INSERT INTO `user_info` (`USER_ID`, `ADDITIONAL_INFO`) VALUES
-(10, 'userp@mail.com');
+(10, 'userp@mail.com'),
+(11, '123@gmail.com'),
+(12, 'kaperzagloba22@gmail.com'),
+(13, 'kaperzagloba22@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -339,17 +512,19 @@ INSERT INTO `user_info` (`USER_ID`, `ADDITIONAL_INFO`) VALUES
 --
 
 CREATE TABLE `visit_counts` (
+  `ID` int(11) NOT NULL,
   `USERID` int(11) NOT NULL,
   `last_visit` datetime DEFAULT NULL,
-  `visit_count` int(11) DEFAULT 0
+  `visit_count` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visit_counts`
 --
 
-INSERT INTO `visit_counts` (`USERID`, `last_visit`, `visit_count`) VALUES
-(10, '2024-11-19 13:54:37', 1);
+INSERT INTO `visit_counts` (`ID`, `USERID`, `last_visit`, `visit_count`) VALUES
+(1, 13, '2024-11-19 19:49:18', 221),
+(2, 9, '2024-11-19 20:45:12', 3);
 
 -- --------------------------------------------------------
 
@@ -457,6 +632,13 @@ ALTER TABLE `champ_roles`
   ADD UNIQUE KEY `ROLE_NAME` (`ROLE_NAME`);
 
 --
+-- Indeksy dla tabeli `crosshair_screenshots`
+--
+ALTER TABLE `crosshair_screenshots`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `USER_ID` (`USER_ID`);
+
+--
 -- Indeksy dla tabeli `profilepics`
 --
 ALTER TABLE `profilepics`
@@ -487,7 +669,8 @@ ALTER TABLE `user_info`
 -- Indeksy dla tabeli `visit_counts`
 --
 ALTER TABLE `visit_counts`
-  ADD PRIMARY KEY (`USERID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `USERID` (`USERID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -497,37 +680,43 @@ ALTER TABLE `visit_counts`
 -- AUTO_INCREMENT for table `ability_c`
 --
 ALTER TABLE `ability_c`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `ability_e`
 --
 ALTER TABLE `ability_e`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `ability_q`
 --
 ALTER TABLE `ability_q`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `ability_x`
 --
 ALTER TABLE `ability_x`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `champs`
 --
 ALTER TABLE `champs`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `champ_roles`
 --
 ALTER TABLE `champ_roles`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `crosshair_screenshots`
+--
+ALTER TABLE `crosshair_screenshots`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -539,17 +728,35 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `visit_counts`
+--
+ALTER TABLE `visit_counts`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `crosshair_screenshots`
+--
+ALTER TABLE `crosshair_screenshots`
+  ADD CONSTRAINT `crosshair_screenshots_ibfk_1` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`ID`);
+
+--
 -- Constraints for table `profilepics`
 --
 ALTER TABLE `profilepics`
   ADD CONSTRAINT `profilepics_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `users` (`ID`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `visit_counts`
+--
+ALTER TABLE `visit_counts`
+  ADD CONSTRAINT `visit_counts_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `users` (`ID`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

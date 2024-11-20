@@ -134,12 +134,12 @@ if (isset($_SESSION['username'])) {
             echo "<p>Ostatnia wizyta: " . $lastVisit . "</p>";
 
             // Testowanie aplikacji ( licznik logowań i rank system )
-            /*
+            
             $visitCount++;
             $sqlUpdateVisitCount = "UPDATE visit_counts SET visit_count = ? WHERE USERID = ?";
             $stmtUpdateVisitCount = $conn->prepare($sqlUpdateVisitCount);
             $stmtUpdateVisitCount->bind_param('ii', $visitCount, $userId);
-            $stmtUpdateVisitCount->execute(); */
+            $stmtUpdateVisitCount->execute(); 
 
             // Obliczanie poziomu i progresu użytkownika
             $level = floor($visitCount / 10);  // Co 10 wizyt, poziom rośnie

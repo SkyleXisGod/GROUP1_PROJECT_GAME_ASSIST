@@ -60,6 +60,23 @@ $conn->close();
     <link rel="stylesheet" type="text/css" href="profilelist.css">
     <link rel="shortcut icon" href="radiant-rank.png">
     <script src="profilelist.js"></script>
+    <script src="ranksystem.js"></script>
+    <style>
+        .floating-island {
+    
+    border-radius: 20px;
+    box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
+    background: #1a1a1a;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+    </style>
 </head>
 <body>
 

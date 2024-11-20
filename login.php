@@ -20,7 +20,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['username'] = $user['USERNAME'];
             $userId = $user['ID']; // ID użytkownika
 
-            // Zaktualizowanie tabeli 'visit_counts'
+            // Przed sprawdzeniem ostatniej wizyty użytkownika
+            $currentDateTime = new DateTime(); // Tworzymy nowy obiekt DateTime
+
+            // Sprawdzamy, kiedy użytkownik ostatni raz odwiedził stronę
+            $stmtCheckVisit = $pdo->prepare("SELECT last_visit, visit_count FROM visit_counts WHERE USERID = ?");
+            $stmtCheckVisit->execute([$userId]);
+            $visitResult = $stmtCheckVisit->fetch();
+
+            // Jeśli użytkownik nie ma jeszcze rekordu w tabeli visit_counts
+            if ($visitResult === false) {
+                $lastVisit = "Pierwsza wizyta";  // Wartość domyślna dla nowych użytkowników
+                $visitCount = 1; // Liczba wizyt to 1
+                // Dodajemy nowy rekord w tabeli
+                $sqlInsertVisit = "INSERT INTO visit_counts (USERID, visit_count, last_visit) VALUES (?, 1, NOW())";
+                $stmtInsertVisit = $pdo->prepare($sqlInsertVisit);
+                $stmtInsertVisit->execute([$userId]);
+            } else {
+                // Jeśli użytkownik ma rekord w tabeli, sprawdzamy, kiedy była ostatnia wizyta
+                $lastVisit = $visitResult['last_visit'];
+                $visitCount = $visitResult['visit_count'];
+            }
+
+            // Obliczanie rangi użytkownika na podstawie liczby wizyt
+            $rank = floor($visitCount / 10);  // Co 10 wizyt, ranga rośnie
+
+            // Sprawdzamy, czy użytkownik ma już przypisaną rangę w tabeli `user_ranks`
+            $stmtCheckRank = $pdo->prepare("SELECT rank FROM user_ranks WHERE user_id = ?");
+            $stmtCheckRank->execute([$userId]);
+            $rankResult = $stmtCheckRank->fetch();
+
+            if ($rankResult) {
+                // Użytkownik ma już rangę, aktualizujemy ją
+                $stmtUpdateRank = $pdo->prepare("UPDATE user_ranks SET rank = ? WHERE user_id = ?");
+                $stmtUpdateRank->execute([$rank, $userId]);
+            } else {
+                // Użytkownik nie ma jeszcze przypisanej rangi, dodajemy nowy rekord
+                $stmtInsertRank = $pdo->prepare("INSERT INTO user_ranks (user_id, rank) VALUES (?, ?)");
+                $stmtInsertRank->execute([$userId, $rank]);
+            }
+            
             // Najpierw sprawdzamy, czy użytkownik ma już wpis w tabeli 'visit_counts'
             $stmt = $pdo->prepare("SELECT * FROM visit_counts WHERE USERID = ?");
             $stmt->execute([$userId]);

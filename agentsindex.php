@@ -150,46 +150,6 @@ $linkClass = '';
     <link rel="shortcut icon" href="radiant-rank.png">
     <script src="profilelist.js"></script>
     <script>
-        const cardContainer = document.getElementById('cardContainer');
-        let isDragging = false;
-        let startX;
-        let scrollLeft;
-
-        cardContainer.addEventListener('wheel', (e) => {
-            // Zatrzymaj domyślne zachowanie przewijania strony
-            e.preventDefault();
-
-            // Ustal kierunek przewijania
-            const scrollAmount = e.deltaY < 0 ? -100 : 100;  // Ustawienie o ile ma przesunąć się kontener
-
-            // Przesunięcie w poziomie
-            cardContainer.scrollLeft += scrollAmount;  // Zmieniamy scrollLeft w zależności od kierunku scrolla
-        });
-
-        cardContainer.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            cardContainer.classList.add('active'); // Opcjonalnie zmień styl kursora
-            startX = e.pageX - cardContainer.offsetLeft;
-            scrollLeft = cardContainer.scrollLeft;
-        });
-
-        cardContainer.addEventListener('mouseleave', () => {
-            isDragging = false;
-            cardContainer.classList.remove('active');
-        });
-
-        cardContainer.addEventListener('mouseup', () => {
-            isDragging = false;
-            cardContainer.classList.remove('active');
-        });
-
-        cardContainer.addEventListener('mousemove', (e) => {
-            if (!isDragging) return; // Przerwij, jeśli mysz nie jest wciśnięta
-            e.preventDefault();
-            const x = e.pageX - cardContainer.offsetLeft;
-            const walk = (x - startX) * 1.5; // Współczynnik prędkości przewijania
-            cardContainer.scrollLeft = scrollLeft - walk;
-        });
 
         function searchAgent() {
             const searchQuery = document.getElementById('agentSearch').value.toLowerCase().trim();
@@ -281,7 +241,7 @@ $linkClass = '';
             color: white;
             max-width: 500px;
             min-width: 500px;
-            height: auto;
+            height: 98%;
             text-align: center;
             box-shadow: 0 0 10px #58b8f1;
             flex-shrink: 0; /* Zapewnia, że karty nie będą się kurczyć */

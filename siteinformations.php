@@ -28,6 +28,7 @@ if (isset($_SESSION['username'])) {
         if ($role_id == 3 || $role_id == 1) {
             // Jeśli użytkownik ma odpowiednią rolę, strona jest odblokowana
             $lastVisit = "Brak danych";  // Domyślna wartość, jeśli użytkownik nie ma jeszcze rekordu w tabeli
+            $visitCount = 0;  // Zmienna do przechowywania liczby wizyt
 
             // Połączenie z bazą danych
             $host = 'localhost';
@@ -39,11 +40,6 @@ if (isset($_SESSION['username'])) {
             // Sprawdzamy połączenie
             if ($conn->connect_error) {
                 die("Połączenie z bazą danych nieudane: " . $conn->connect_error);
-            }
-
-            // Sprawdzamy, czy użytkownik jest zalogowany
-            if (!isset($_SESSION['username'])) {
-                die("Musisz być zalogowany, aby wyświetlić tę stronę.");
             }
 
             // Pobieramy USER_ID na podstawie username z sesji
@@ -99,6 +95,34 @@ if (isset($_SESSION['username'])) {
                 $visitCount = $visitData['visit_count'];
             }
 
+            // Testowanie aplikacji ( licznik logowań i rank system )
+            
+            /*$visitCount++;
+            $sqlUpdateVisitCount = "UPDATE visit_counts SET visit_count = ? WHERE USERID = ?";
+            $stmtUpdateVisitCount = $conn->prepare($sqlUpdateVisitCount);
+            $stmtUpdateVisitCount->bind_param('ii', $visitCount, $userId);
+            $stmtUpdateVisitCount->execute(); */
+
+            // Obliczanie rangi użytkownika na podstawie liczby wizyt
+            $rank = floor($visitCount / 10);  // Co 10 wizyt, ranga rośnie
+
+            // Sprawdzamy, czy użytkownik ma już przypisaną rangę w tabeli `user_ranks`
+            $stmtCheckRank = $conn->prepare("SELECT rank FROM user_ranks WHERE user_id = ?");
+            $stmtCheckRank->bind_param('i', $userId);
+            $stmtCheckRank->execute();
+            $rankResult = $stmtCheckRank->get_result();
+
+            if ($rankResult->num_rows > 0) {
+                // Użytkownik ma już rangę, aktualizujemy ją
+                $stmtUpdateRank = $conn->prepare("UPDATE user_ranks SET rank = ? WHERE user_id = ?");
+                $stmtUpdateRank->bind_param('ii', $rank, $userId);
+                $stmtUpdateRank->execute();
+            } else {
+                // Użytkownik nie ma jeszcze przypisanej rangi, dodajemy nowy rekord
+                $stmtInsertRank = $conn->prepare("INSERT INTO user_ranks (user_id, rank) VALUES (?, ?)");
+                $stmtInsertRank->bind_param('ii', $userId, $rank);
+                $stmtInsertRank->execute();
+            }
 
             // Wyświetlanie danych
             echo "<div class='settingsheaderdiv'>";
@@ -133,14 +157,6 @@ if (isset($_SESSION['username'])) {
             echo "<p>Liczba Twoich wizyt: " . $visitCount . "</p>";
             echo "<p>Ostatnia wizyta: " . $lastVisit . "</p>";
 
-            // Testowanie aplikacji ( licznik logowań i rank system )
-            
-            $visitCount++;
-            $sqlUpdateVisitCount = "UPDATE visit_counts SET visit_count = ? WHERE USERID = ?";
-            $stmtUpdateVisitCount = $conn->prepare($sqlUpdateVisitCount);
-            $stmtUpdateVisitCount->bind_param('ii', $visitCount, $userId);
-            $stmtUpdateVisitCount->execute(); 
-
             // Obliczanie poziomu i progresu użytkownika
             $level = floor($visitCount / 10);  // Co 10 wizyt, poziom rośnie
             $progress = ($visitCount % 10) * 10;  // Procentowy postęp w obrębie poziomu (0-100)
@@ -151,7 +167,7 @@ if (isset($_SESSION['username'])) {
             echo "<img src='ranksystem/level$image_level.png' alt='level' width='50px' height='50px'>"; // Ikona poziomu
             echo "<div class='level-bar' style='width: $progress%;'></div>";  // Pasek postępu
             echo "</div>";
-
+            
             // Wyświetlamy globalny licznik odwiedzin
             $sqlGlobalVisitCount = "SELECT total_visits FROM global_visit_count LIMIT 1";
             $resultGlobal = $conn->query($sqlGlobalVisitCount);
@@ -164,7 +180,6 @@ if (isset($_SESSION['username'])) {
                 $conn->query($sqlInsertGlobalVisit);
                 $globalVisits = 1;
             }
-
             // Wyświetlamy dane
             echo "<p>Globalny licznik odwiedzin: " . $globalVisits . "</p>";
 
@@ -199,3 +214,4 @@ if (isset($_SESSION['username'])) {
     echo "Musisz być zalogowany, aby zobaczyć tę stronę.";
 }
 ?>
+

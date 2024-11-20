@@ -314,7 +314,11 @@ for ($i = 0; $i <= 25; $i++) {
                         <tr>
                             <td><?php echo htmlspecialchars($user['username']); ?></td>
                             <td>
-                                <img src="ranksystem/level<?php echo htmlspecialchars($user['rank']);?>.png" class="rank-image" alt="Ranga">
+                                <?php 
+                                    $rank = htmlspecialchars($user['rank']); 
+                                    $rankIndex = min($rank, 25); // Ograniczamy maksymalny indeks do 25
+                                ?>
+                                <img src="ranksystem/level<?php echo $rankIndex; ?>.png" class="rank-image" alt="Ranga">
                             </td>
                             <td><?php echo htmlspecialchars($user['visit_count']); ?></td>
                         </tr>
@@ -327,8 +331,9 @@ for ($i = 0; $i <= 25; $i++) {
         <h2>Dystrybucja Rang</h2>
         <div class="chart-container">
             <canvas id="rankChart"></canvas>
+        </div><br><br><button onclick='window.location.href="dashboard.php"'>Przejdź do Dashboard</button>
+    </div>
         </div>
-    </div></div>
 
     <script>
         // Dane dla wykresu

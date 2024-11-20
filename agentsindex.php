@@ -271,6 +271,7 @@ $linkClass = '';
     <div class="dashboardleftheaderdiv">
         <img src="radiant-rank.png" style="width: 75px;height: 75px;"><br><br>
         <h5 class="glow2">SkillShot Academy</h5><br>
+        <button style="align-self: center;" onclick='window.location.href="dashboard.php"'>Przejdź do Dashboard</button>
     </div>
     <div class="dashboardmidheaderdiv">
     <div class="search-container">

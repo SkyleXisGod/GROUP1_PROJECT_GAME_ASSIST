@@ -1,7 +1,55 @@
 <?php
 session_start();
-?>
 
+// Połączenie z bazą danych
+$host = 'localhost';
+$dbusername = 'root';
+$dbpassword = '';
+$dbname = 'gameassistandb';
+$conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
+
+// Sprawdzamy połączenie
+if ($conn->connect_error) {
+    die("Połączenie z bazą danych nieudane: " . $conn->connect_error);
+}
+
+// Pobieramy username z sesji
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
+
+$profilePic = 'https://via.placeholder.com/50';
+$linkHref = 'siteinformations.php';
+$linkClass = '';
+$lockedIcon = '';
+
+// Jeśli użytkownik jest zalogowany, pobieramy dane użytkownika i sprawdzamy jego rolę
+if ($username) {
+    // Pobieramy dane użytkownika
+    $sql = "SELECT u.ID, p.PROFILEPICFILE, u.ROLEID 
+            FROM users u
+            LEFT JOIN profilepics p ON u.ID = p.USERID
+            WHERE u.username = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $profilePic = $row['PROFILEPICFILE'] ? 'data:image/jpeg;base64,' . base64_encode($row['PROFILEPICFILE']) : 'https://via.placeholder.com/50';
+        $role_id = $row['ROLEID'];
+
+        // Jeśli użytkownik nie ma roli user+ (role_id != 3), blokujemy dostęp do statystyk
+        if ($role_id != 3) {
+            $lockedIcon = '<img src="lock-icon.png" alt="Locked" style="width: 16px; height: 16px; margin-left: 5px;">';
+            $linkHref = '#';  // Ustawiamy href na #, aby link nie działał
+            $linkClass = 'locked-link';  // Możemy dodać klasę CSS, żeby wizualnie pokazać, że link jest zablokowany
+        }
+    }
+}
+
+// Zamykamy połączenie z bazą danych
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -25,53 +73,9 @@ session_start();
         <div class="profile-container">
             <!-- Nagłówek profilu -->
             <div class="profile-header" onclick="toggleSettings()">
-                <?php
-                    // Sprawdzamy, czy użytkownik jest zalogowany
-                    if (isset($_SESSION['username'])) {
-                        // Łączenie z bazą danych
-                        $host = 'localhost';
-                        $dbusername = 'root';
-                        $dbpassword = '';
-                        $dbname = 'gameassistandb';
-                        $conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
-
-                        // Sprawdzamy połączenie
-                        if ($conn->connect_error) {
-                            die("Połączenie z bazą danych nieudane: " . $conn->connect_error);
-                        }
-
-                        // Pobieramy username z sesji
-                        $username = $_SESSION['username'];
-
-                        // Pobieramy USERID na podstawie username
-                        $sql = "SELECT u.ID, p.PROFILEPICFILE 
-                                FROM users u
-                                LEFT JOIN profilepics p ON u.ID = p.USERID
-                                WHERE u.username = ?";
-                        $stmt = $conn->prepare($sql);
-                        $stmt->bind_param('s', $username);
-                        $stmt->execute();
-                        $result = $stmt->get_result();
-
-                        // Jeśli użytkownik istnieje i ma zdjęcie profilowe
-                        if ($result->num_rows > 0) {
-                            $row = $result->fetch_assoc();
-                            $profilePic = $row['PROFILEPICFILE'] ? 'data:image/jpeg;base64,' . base64_encode($row['PROFILEPICFILE']) : 'https://via.placeholder.com/50';
-                        } else {
-                            // Jeśli brak zdjęcia profilowego, ustawiamy placeholder
-                            $profilePic = 'https://via.placeholder.com/50';
-                        }
-
-                        // Zamykamy połączenie z bazą danych
-                        $conn->close();
-                    } else {
-                        // Jeśli brak sesji użytkownika, ustawiamy placeholder
-                        $profilePic = 'https://via.placeholder.com/50';
-                    }
-                ?>
                 <!-- Wyświetlamy zdjęcie profilowe -->
                 <img src="<?php echo $profilePic; ?>" alt="Profil" class="profile-img">
-                <span class="username"><?php echo $_SESSION['username']; ?></span>
+                <span class="username"><?php echo $username; ?></span>
             </div>
 
             <!-- Lista ustawień -->
@@ -79,7 +83,7 @@ session_start();
                 <ul>
                     <li><a href="usersettings.php">Ustawienia konta</a></li>
                     <li><a href="change_password_form.php">Zmiana hasła</a></li>
-                    <li><a href="siteinformations.php">Statystyki!</a></li>
+                    <li><a href="<?php echo $linkHref; ?>" class="<?php echo $linkClass; ?>">Statystyki! <?php echo $lockedIcon; ?></a></li>
                     <li><a href="logout.php">Wyloguj się</a></li>
                 </ul>
             </div>
@@ -93,6 +97,7 @@ session_start();
         exit();
     }
 ?>
+
 <div class="dashboardmaindiv">
     <div class="floating-island">
         <div class="link-grid">
@@ -107,6 +112,7 @@ session_start();
         </div>
     </div>
 </div>
+
 <div class="dashboardfooterdiv">
     <div class="dashboardfooterdivleft">
         <h2> 

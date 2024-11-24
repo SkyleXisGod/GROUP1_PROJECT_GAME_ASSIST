@@ -1,7 +1,33 @@
 <?php
 session_start();
 
-$lastVisit = "Brak danych";  // Domyślna wartość, jeśli użytkownik nie ma jeszcze rekordu w tabeli
+// Sprawdzamy, czy użytkownik jest zalogowany
+if (isset($_SESSION['username'])) {
+    // Połączenie z bazą danych (przykład z MySQLi)
+    $mysqli = new mysqli("localhost", "root", "", "gameassistandb");
+
+    if ($mysqli->connect_error) {
+        die("Błąd połączenia z bazą danych: " . $mysqli->connect_error);
+    }
+
+    // Pobieramy nazwę użytkownika z sesji
+    $username = $_SESSION['username'];
+
+    // Przygotowujemy zapytanie SQL, aby sprawdzić rolę użytkownika
+    $stmt = $mysqli->prepare("SELECT ROLEID FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username); // 's' oznacza typ zmiennej - string
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($role_id);
+
+    // Jeśli użytkownik istnieje
+    if ($stmt->num_rows > 0) {
+        $stmt->fetch();
+
+        // Sprawdzamy, czy użytkownik ma rolę 'user+' (role_id = 3)
+        if ($role_id == 3) {
+            // Jeśli użytkownik ma odpowiednią rolę, strona jest odblokowana
+            $lastVisit = "Brak danych";  // Domyślna wartość, jeśli użytkownik nie ma jeszcze rekordu w tabeli
 $lastVisit = "Brak danych";  // Domyślna wartość, jeśli użytkownik nie ma jeszcze rekordu w tabeli
 
 // Połączenie z bazą danych
@@ -132,9 +158,8 @@ echo "'>Przejdź do Dashboard</button>
 </div></div>";
 
 $conn->close();
-?>
 
-<script>
+echo "<script>
 // Funkcja do aktualizowania godziny co sekundę
 setInterval(function() {
     var now = new Date();
@@ -143,4 +168,59 @@ setInterval(function() {
     var seconds = now.getSeconds().toString().padStart(2, '0');
     document.getElementById('current-time').textContent = hours + ':' + minutes + ':' + seconds;
 }, 1000);
-</script>
+</script>";
+        } else {
+            // Jeśli użytkownik nie ma odpowiedniej roli, wyświetlamy komunikat o braku dostępu
+            echo '  <link rel="stylesheet" type="text/css" href="gamelikecss.css">
+                            <link rel="stylesheet" type="text/css" href="profilelist.css">
+                            <div class="tipsmaindiv">
+                            <div class="tip-box">
+                                <h2>Dodaj adres EMAIL, aby uzyskać rolę USER+!</h2>
+                            </div>
+                            </div>
+                    
+                    <script>
+                        // Przekierowanie na index.php po 7 sekundach
+                        setTimeout(function() {
+                            window.location.href = "dashboard.php"; // Zmień na swoją stronę docelową
+                        }, 3000); // 3000 ms = 3 sekund
+                    </script>';
+        }
+    } else {
+        // Jeśli użytkownik nie istnieje w bazie
+        echo '  <link rel="stylesheet" type="text/css" href="gamelikecss.css">
+                            <link rel="stylesheet" type="text/css" href="profilelist.css">
+                            <div class="tipsmaindiv">
+                            <div class="tip-box">
+                                <h2>Użytkownik nie istnieje!</h2>
+                            </div>
+                            </div>
+                    
+                    <script>
+                        // Przekierowanie na index.php po 7 sekundach
+                        setTimeout(function() {
+                            window.location.href = "dashboard.php"; // Zmień na swoją stronę docelową
+                        }, 3000); // 3000 ms = 3 sekund
+                    </script>';
+    }
+
+    $stmt->close();
+    $mysqli->close();
+} else {
+    // Jeśli użytkownik nie jest zalogowany
+    echo '  <link rel="stylesheet" type="text/css" href="gamelikecss.css">
+                            <link rel="stylesheet" type="text/css" href="profilelist.css">
+                            <div class="tipsmaindiv">
+                            <div class="tip-box">
+                                <h2>Zaloguj się!</h2>
+                            </div>
+                            </div>
+                    
+                    <script>
+                        // Przekierowanie na index.php po 7 sekundach
+                        setTimeout(function() {
+                            window.location.href = "dashboard.php"; // Zmień na swoją stronę docelową
+                        }, 3000); // 3000 ms = 3 sekund
+                    </script>';
+}
+?>

@@ -1,0 +1,497 @@
+/* Globalne ustawienia */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Tło i podstawowe style strony */
+body {
+    background-image: url(background-gif.gif);
+    background-size: cover;  /* Ciemne tło */
+    color: #f1f1f1;        /* Jasny tekst */
+    font-size: 16px;
+    line-height: 1.5;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/* Podstawowe elementy strony DASHBOARD */
+.dashboardheaderdiv {
+    align-self: top;
+    background: #1a1a1a;
+    box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.dashboardmaindiv {
+    background: transparent;
+    box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 82%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;  /* Dodajemy odstęp pomiędzy wyspami */
+}
+
+.submaindiv {
+    background: #1a1a1a;
+    box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;  /* Dodajemy odstęp pomiędzy wyspami */
+}
+
+.tipsmaindiv {
+    background: transparent;
+    box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboardleftheaderdiv {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.settingstopheaderdiv {
+    align-self: top;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.settingsheaderdiv {
+    align-self: top;
+    background: #1a1a1a;
+    box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
+    align-items: center;
+    width: 80%;
+    height: 90%;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboardrightheaderdiv {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboardmidheaderdiv {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboardfooterdivleft {
+    background: #1a1a1a;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.dashboardfooterdivright {
+    background: #1a1a1a;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.dashboardfooterdiv {
+    box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
+    background: #1a1a1a;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 8%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.floating-island {
+    
+    border-radius: 20px;
+    box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
+    background: #1a1a1a;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+.floating-island-subpage {
+    
+    border-radius: 20px;
+    box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
+    background: #1a1a1a;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+
+/* Podstawowe elementy strony REGISTER i LOGIN */
+.maindiv {
+    background: transparent;
+    box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.headerdiv {
+    background: #1a1a1a;
+    box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+}
+.div {
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.footerdivleft {
+    background: #1a1a1a;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.footerdivright {
+    background: #1a1a1a;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.footerdiv {
+    box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
+    background: #1a1a1a;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+/* Kontener główny */
+.container {
+    width: 100%;
+    max-width: 800px;
+    background: #121212;  /* Ciągłe ciemne tło */
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Nagłówek strony */
+h1 {
+    color: #58b8f1;       /* Niebieski kolor dla nagłówków */
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+/* Formularze */
+
+label {
+    font-size: 1rem;
+    color: #ddd;
+}
+
+/* Inputy i buttony */
+input[type="text"], input[type="password"], input[type="email"] {
+    padding: 15px;
+    background: #1a1a1a;
+    border: 2px solid #444;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+    background: #000000;  /* Jaśniejszy kolor tła po focu */
+    border-color: #58b8f1;  /* Kolor podkreślenia */
+    outline: none;
+}
+
+.submit {
+    padding: 10px;
+    background: #58b8f1;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+.submit:hover {
+    background: #47a4d4;
+    transform: scale(1.05);
+}
+.submit:active {
+    background: #3897c7;
+    transform: scale(1);
+}
+
+button {
+    padding: 15px;
+    background: #58b8f1;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background: #47a4d4;
+    transform: scale(1.05);
+}
+
+button:active {
+    background: #3897c7;
+    transform: scale(1);
+}
+
+/* Linki */
+a {
+    text-decoration: none;
+    color: #58b8f1;
+    font-size: 1rem;
+    text-align: center;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+a:hover {
+    color: #ffffff;
+}
+
+/* Sekcje informacji */
+.info-box {
+    background: #222;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.info-box h2 {
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+.info-box p {
+    font-size: 1rem;
+    color: #ccc;
+}
+
+/* Sekcja przycisków i formularzy */
+.form-action {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Dodanie efektów do formularzy */
+input[type="text"], input[type="password"], input[type="email"], button {
+    transition: all 0.3s ease-in-out;
+}
+
+input[type="text"]:hover, input[type="password"]:hover, input[type="email"]:hover {
+    background: #444;
+    border-color: #58b8f1;
+}
+
+/* Animacje tła */
+@keyframes glowing {
+    0% {
+        box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
+    }
+    50% {
+        box-shadow: 0 0 20px #58b8f1, 0 0 30px #58b8f1, 0 0 40px #58b8f1;
+    }
+    100% {
+        box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
+    }
+}
+
+/* Dodanie efektu pulsowania do niektórych elementów */
+.button-glow {
+    animation: glowing 1.5s infinite alternate;
+}
+
+.linkglow {
+    color: #fff;
+    text-align: center;
+    -webkit-animation: link 1s ease-in-out infinite alternate;
+    -moz-animation: link 1s ease-in-out infinite alternate;
+    animation: link 1s ease-in-out infinite alternate;
+  }
+
+  @keyframes link {
+    from {
+      text-shadow: 0 0 10px #ff0000, 0 0 20px #fd00c6, 0 0 30px #b700ff, 0 0 40px #4c00ff, 0 0 50px #0026ff;
+    }
+    to {
+      text-shadow: 0 0 20px #2bff00, 0 0 30px #d0ff00, 0 0 40px #ffae00, 0 0 50px #ff3300, 0 0 60px #ff0000;
+    }
+  }
+
+.glow {
+    font-size: 80px;
+    color: #fff;
+    text-align: center;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 10px #0077ff, 0 0 20px #0077ff, 0 0 30px #0077ff, 0 0 40px #0077ff, 0 0 50px #0077ff, 0 0 60px #0077ff, 0 0 70px #0077ff;
+    }
+    to {
+      text-shadow: 0 0 20px #58b8f1, 0 0 30px #58b8f1, 0 0 40px #58b8f1, 0 0 50px #58b8f1, 0 0 60px #58b8f1, 0 0 70px #58b8f1, 0 0 80px #58b8f1;
+    }
+  }
+
+  .glow2 {
+    font-size: 40px;
+    color: #fff;
+    text-align: center;
+    -webkit-animation: glow2 1s ease-in-out infinite alternate;
+    -moz-animation: glow2 1s ease-in-out infinite alternate;
+    animation: glow2 1s ease-in-out infinite alternate;
+  }
+  
+  @keyframes glow2 {
+    from {
+      text-shadow: 0 0 10px #0077ff, 0 0 20px #0077ff, 0 0 30px #0077ff, 0 0 40px #0077ff, 0 0 50px #0077ff, 0 0 60px #0077ff, 0 0 70px #0077ff;
+    }
+    to {
+      text-shadow: 0 0 20px #58b8f1, 0 0 30px #58b8f1, 0 0 40px #58b8f1, 0 0 50px #58b8f1, 0 0 60px #58b8f1, 0 0 70px #58b8f1, 0 0 80px #58b8f1;
+    }
+  }
+
+  .linkbut {
+    transition: all 1s ease; transition: all 0.6s ease; transition: all 0.6s ease;
+}
+  .linkbut:hover {
+    transition: all 0.3s;
+    transition: all 0.3s;
+    transition: all 0.3s;
+    transform: scale(1.1);
+    transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+
+/* Stylowanie dla kontenera siatki */
+.link-grid {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;            /* Centrowanie kontenera na stronie */
+}
+
+/* Stylowanie dla każdego linku */
+.link-box {
+    margin: 10px;
+    display: flex;                     /* Flexbox dla centrowania tekstu */
+    justify-content: center;            /* Wyrównanie poziome */
+    align-items: center;                /* Wyrównanie pionowe */
+    background-color: transparent;         /* Tło przycisku */
+    color: white;                      /* Kolor tekstu */
+    font-size: 18px;                    /* Rozmiar czcionki */
+    text-decoration: none;              /* Brak podkreślenia */
+    height: 300px;                      /* Wysokość kwadratu */
+    width: 300px;                       /* Szerokość kwadratu */
+    border-radius: 10px;                /* Zaokrąglenie rogów */
+    box-shadow: 0 0 5px #58b8f1; /* Cień wokół kwadratu */
+    transition: all 0.3s ease;          /* Płynna animacja przy najechaniu */
+}
+
+/* Efekt przy najechaniu myszką */
+.link-box:hover {
+    background-color: #0056b3;         /* Zmiana koloru tła przy najechaniu */
+    transform: translateY(-5px);       /* Lekka animacja podnoszenia */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Zwiększenie cienia przy najechaniu */
+}
+

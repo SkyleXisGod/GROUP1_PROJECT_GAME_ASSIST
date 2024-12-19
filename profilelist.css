@@ -1,0 +1,74 @@
+
+/* Ogólne style dla kontenera profilu */
+.profile-container {
+width: 90%;
+padding: 10px;
+background-color: transparent;
+border-radius: 8px;
+box-shadow: 0 0 5px #58b8f1;
+position: relative; /* Dodane, aby lista ustawień mogła się rozwijać w kontekście tego kontenera */
+}
+
+/* Nagłówek profilu */
+.profile-header {
+display: flex;
+align-items: center;
+cursor: pointer;
+}
+
+.profile-img {
+width: 50px;
+height: 50px;
+border-radius: 50%;
+margin-right: 10px;
+}
+
+.username {
+font-size: 18px;
+font-weight: bold;
+font-style: italic;
+}
+
+/* Ustawienia */
+.settings-list {
+display: none;
+margin-top: 10px;
+position: absolute;  /* Zmiana na absolute, aby lista rozwijała się w dół */
+left: 0;             /* Aby lista była wyrównana do lewej krawędzi kontenera */
+width: 100%;         /* Szerokość listy ustawiona na 100% szerokości kontenera */
+background: #1a1a1a;
+border-radius: 8px;
+box-shadow: 0 0 5px #58b8f1, 0 0 10px #58b8f1, 0 0 15px #58b8f1;
+z-index: 10;         /* Zapewnia, że lista nie zostanie zasłonięta innymi elementami */
+}
+
+/* Aktywna lista ustawień */
+.settings-list.open {
+display: block;
+}
+
+.settings-list ul {
+list-style-type: none;
+padding: 0;
+margin: 0;
+}
+
+.settings-list ul li {
+padding: 8px;
+border-top: 1px solid #58b8f1;
+cursor: pointer;
+}
+
+.settings-list ul li:first-child {
+border-top: none;
+}
+
+.settings-list ul li a {
+text-decoration: none;
+color: #ffffff;
+font-size: 16px;
+}
+
+.settings-list ul li a:hover {
+color: #007bff;
+}

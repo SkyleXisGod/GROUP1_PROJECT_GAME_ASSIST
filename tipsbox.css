@@ -1,0 +1,36 @@
+body {
+    background-color: #121212;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.tip-box {
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    animation: glowingbox 1s ease-in-out infinite alternate;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+.tip-box h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+.tip-box p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+@keyframes glowingbox {
+    from {
+      box-shadow: 0 0 10px #ff0000, 0 0 20px #fc6500, 0 0 30px #ffd901, 0 0 40px #bbff00, 0 0 50px #3cff00, 0 0 60px #2a6900, 0 0 70px #00ff73;
+    }
+    to {
+      box-shadow: 0 0 20px #00ffea, 0 0 30px #00c2f3, 0 0 40px #0026ff, 0 0 50px #8400ff, 0 0 60px #ee00e2, 0 0 70px #e90080, 0 0 80px #ff0000;
+    }
+  }
